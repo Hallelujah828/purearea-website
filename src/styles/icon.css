@@ -1,11 +1,10 @@
 @font-face {
-  font-family: 'iconfont'; /* project id 738171 */
-  src: url('//at.alicdn.com/t/font_738171_uad9akyyyw8.eot');
-  src: url('//at.alicdn.com/t/font_738171_uad9akyyyw8.eot?#iefix')
-      format('embedded-opentype'),
-    url('//at.alicdn.com/t/font_738171_uad9akyyyw8.woff') format('woff'),
-    url('//at.alicdn.com/t/font_738171_uad9akyyyw8.ttf') format('truetype'),
-    url('//at.alicdn.com/t/font_738171_uad9akyyyw8.svg#iconfont') format('svg');
+  font-family: 'iconfont';  /* project id 738171 */
+  src: url('//at.alicdn.com/t/font_738171_ji4f1zpg8i.eot');
+  src: url('//at.alicdn.com/t/font_738171_ji4f1zpg8i.eot?#iefix') format('embedded-opentype'),
+  url('//at.alicdn.com/t/font_738171_ji4f1zpg8i.woff') format('woff'),
+  url('//at.alicdn.com/t/font_738171_ji4f1zpg8i.ttf') format('truetype'),
+  url('//at.alicdn.com/t/font_738171_ji4f1zpg8i.svg#iconfont') format('svg');
 }
 
 .iconfont {
@@ -100,4 +99,10 @@
 }
 .icon-save01:before {
   content: '\e6a6';
+}
+.icon-en:before {
+  content: '\e79c';
+}
+.icon-zh:before {
+  content: '\e7a0';
 }

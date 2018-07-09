@@ -3,24 +3,28 @@
     <div class="nav-wrap">
       <img src="../../static/vcan-logo.png" class="nav-logo">
       <ul class="nav-title">
-        <li class="nav-title-item">历史品牌及战略</li>
-        <li class="nav-title-item">维迈集团</li>
-        <li class="nav-title-item">Reset认证</li>
-        <li class="nav-title-item">案例分析</li>
+        <li class="nav-title-item" v-for="(item, index) in $t('navTitles')" v-bind:key="index">
+          {{item}}
+        </li>
+        <li class="nav-title-item" @click="changeLocale">
+          <span class="icon-wrap">
+            <i class="iconfont com-icon" :class="$t('curIcon')"></i>
+          </span>
+        </li>
       </ul>
     </div>
     <swiper :options="swiperOption" ref="mySwiper">
       <swiper-slide v-for="(item, index) in swiperSlides" v-bind:key="index">
         <img :src="item" class="swiper-img">
-        <div class="title-wrap" v-if="index==0">
+        <div class="title-wrap" v-show="index==0">
           <div class="pure-logo-wrap">
             <img src="../../static/pure-logo.png" class="pure-logo">
-            <p class="pure-logo-txt">空氣品質改良專家</p>
+            <p class="pure-logo-txt" :class="$t('curLogoTxt')">{{$t('logoTxt')}}</p>
           </div>
           <div class="title-righr-wrap">
-            <p class="title-sm-txt">室内空气治理</p>
-            <h2 class="title-large-txt">综合解决方案</h2>
-            <button class="contact-us clear-btn ">联系我们</button>
+            <p class="title-sm-txt">{{$t('smTitle')}}</p>
+            <h2 class="title-large-txt">{{$t('largeTitle')}}</h2>
+            <button class="contact-us clear-btn">{{$t('contactBtn')}}</button>
           </div>
         </div>
       </swiper-slide>
@@ -30,7 +34,7 @@
       <div class="swiper-button-next swiper-button-white" slot="button-next"></div>
     </swiper>
     <div class="catalogue-wrap vel-flex">
-      <div v-for="(item, index) in catalogue" v-bind:key="index" class="catalogue-item vel-flex">
+      <div v-for="(item, index) in $t('catalogue')" v-bind:key="index" class="catalogue-item vel-flex" @click="showFullMap(index)">
         <span class="icon-wrap">
           <i :class="item.icon" class="iconfont com-icon"></i>
         </span>
@@ -38,7 +42,25 @@
       </div>
     </div>
     <div class="copyright">
-      <p>Copyright © 2015 - 2018 by purearea.Ltd All rights reserved. 沪ICP备XXXXXX号&nbsp; 沪公网安备XXXXXXX号</p>
+      <p>{{$t('copyright')}}</p>
+    </div>
+    <div class="full-map" v-show="mapShow">
+      <swiper :options="swiper01Option" ref="mySwiper" class="swiper01-wrap">
+        <swiper-slide v-for="(item, index) in $t('catalogue')" v-bind:key="index">
+          <img :src="item.img" class="swiper-img">
+          <span class="close-btn-wrap" @click="closeFullMap">
+            <i class="iconfont icon-close"></i>
+          </span>
+        </swiper-slide>
+        <!-- Optional controls -->
+        <div class="swiper-pagination" slot="pagination"></div>
+        <div slot="button-prev" class="left-arrow-wrap">
+          <i class="iconfont icon-arrow"></i>
+        </div>
+        <div slot="button-next" class="right-arrow-wrap">
+          <i class="iconfont icon-arrow arrow-right"></i>
+        </div>
+      </swiper>
     </div>
   </div>
 </template>
@@ -46,6 +68,7 @@
 <script>
 import 'swiper/dist/css/swiper.css'
 import { swiper, swiperSlide } from 'vue-awesome-swiper'
+import LangStorage from './../helpers/lang'
 
 export default {
   name: 'Main',
@@ -55,8 +78,9 @@ export default {
   },
   data () {
     return {
+      curLocale: '',
       swiperOption: {
-      // 是一个组件自有属性，如果notNextTick设置为true，组件则不会通过NextTick来实例化swiper，也就意味着你可以在第一时间获取到swiper对象，假如你需要刚加载遍使用获取swiper对象来做什么事，那么这个属性一定要是true
+        // 是一个组件自有属性，意味着你可以在第一时间获取到swiper对象
         notNextTick: true,
         speed: 2000,
         autoplay: true,
@@ -76,59 +100,47 @@ export default {
         }
       },
       swiperSlides: ['../static/swiper00.jpg', '../static/swiper01.jpg', '../static/swiper02.jpg'],
-      catalogue: [
-        {
-          icon: 'icon-purify',
-          title: '整屋净化',
-          img: '../../tatic/img-purify.jpg'
+      swiper01Option: {
+        notNextTick: true,
+        effect: 'fade',
+        speed: 300,
+        pagination: '.swiper-pagination',
+        slidesPerView: 'auto',
+        centeredSlides: true,
+        paginationClickable: true,
+        navigation: {
+          nextEl: '.swiper-button-next',
+          prevEl: '.swiper-button-prev'
         },
-        {
-          icon: 'icon-purification03',
-          title: '风管式净化器',
-          img: '../../static/img-purification.jpg'
-        },
-        {
-          icon: 'icon-filter',
-          title: '过滤器',
-          img: '../../static/img-filter.jpg'
-        },
-        {
-          icon: 'icon-intelligent01',
-          title: '智能化',
-          img: '../../static/img-intelligent.jpg'
-        },
-        {
-          icon: 'icon-electrostatic',
-          title: '微静电净化器',
-          img: '../../static/img-electrostatic.jpg'
-        },
-        {
-          icon: 'icon-newfan',
-          title: '节能新风机',
-          img: '../../static/img-newfan.jpg'
-        },
-        {
-          icon: 'icon-ch2o02',
-          title: '甲醛净化',
-          img: '../../static/img-ch2o.jpg'
-        },
-        {
-          icon: 'icon-certification',
-          title: 'Reset认证',
-          img: '../../static/img-certification.jpg'
+        onSlideChangeEnd: swiper => {
+          this.page = swiper.realIndex + 1
+          this.index = swiper.realIndex
         }
-      ]
+      },
+      mapShow: false
     }
   },
-  // 定义这个sweiper对象
   computed: {
     swiper () {
       return this.$refs.mySwiper.swiper
     }
   },
   mounted () {
-    // 这边就可以使用swiper这个对象去使用swiper官网中的那些方法
     this.swiper.slideTo(0, 0, false)
+  },
+  methods: {
+    changeLocale () {
+      let locale = this.$i18n.locale
+      locale === 'zh' ? this.$i18n.locale = 'en' : this.$i18n.locale = 'zh'
+      LangStorage.setLang(this.$i18n.locale) // 用做切换和将用户习惯存储到本地浏览器
+    },
+    closeFullMap () {
+      this.mapShow = false
+    },
+    showFullMap (index) {
+      console.log(index)
+      this.mapShow = true
+    }
   }
 }
 </script>
@@ -165,7 +177,8 @@ export default {
   color: #fff;
   cursor: pointer;
 }
-.nav-title-item:hover {
+.nav-title-item:hover,
+.nav-title-item:hover .iconfont {
   color: #a42d58;
 }
 .swiper-slide {
@@ -200,7 +213,6 @@ export default {
   width: 100%;
   height: 30px;
   line-height: 30px;
-  font-size: 18px;
   display: inline-block;
   text-align: justify;
   text-align-last: justify;
@@ -242,6 +254,9 @@ pure-logo-txt::after {
   height: 100px;
   flex-direction: column;
   cursor: pointer;
+  justify-content: flex-start;
+  padding-top: 20px;
+  box-sizing: border-box;
 }
 .catalogue-item:hover .com-icon,
 .catalogue-item:hover .icon-txt {
@@ -249,7 +264,6 @@ pure-logo-txt::after {
 }
 .catalogue-item:not(:last-child) {
   border-right: 2px dashed #ccc;
-  box-sizing: border-box;
 }
 .com-icon {
   font-size: 30px;
@@ -257,6 +271,7 @@ pure-logo-txt::after {
 .icon-txt {
   font-size: 12px;
   margin-top: 10px;
+  text-align: center;
 }
 .copyright {
   width: 100%;
@@ -264,5 +279,54 @@ pure-logo-txt::after {
   font-size: 12px;
   text-align: center;
   padding-bottom: 30px;
+}
+.icon-en, .icon-zh{
+  color: #fff;
+  font-size: 18px;
+}
+.logo-en-txt{
+  font-size: 13px;
+}
+.logo-zh-txt{
+   font-size: 18px;
+}
+.full-map{
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  top: 0;
+  left: 0;
+  background: rgb(0,0,0,0.5);
+  z-index: 1000;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.swiper01-wrap{
+  width: 800px;
+}
+.close-btn-wrap{
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  cursor: pointer;
+}
+.close-btn-wrap:hover .icon-close{
+  color: #000;
+}
+.icon-close{
+  font-size: 25px;
+  color: #666;
+}
+.com-arrow-wrap{
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+}
+.left-arrow-wrap{
+  left: 10px;
+}
+.right-arrow-wrap{
+  right: 10px;
 }
 </style>
