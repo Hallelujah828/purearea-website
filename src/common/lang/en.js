@@ -1,10 +1,15 @@
 module.exports = {
-  navTitles: ['Historical brand and strategy', 'V·CAN group', 'Reset certification', 'Case analysis'],
+  navTitles: [
+    'Historical brand and strategy',
+    'V·CAN group',
+    'Reset certification',
+    'Case analysis'
+  ],
   curIcon: 'icon-zh',
   curLogoTxt: 'logo-en-txt',
-  logoTxt: 'Air quality improvement expert',
-  smTitle: 'Indoor air treatment',
-  largeTitle: 'Integrated solution',
+  logoTxt: 'Air Quality Improvement Expert',
+  smTitle: 'Indoor Air Treatment',
+  largeTitle: 'Integrated Solution',
   contactBtn: 'Contact us',
   catalogue: [
     {
@@ -48,5 +53,6 @@ module.exports = {
       img: '../../static/img-certification.jpg'
     }
   ],
-  copyright: 'Copyright © 2015 - 2018 by purearea.Ltd. All rights reserved.Shanghai ICP No.xxx. Shanghai Public Network Security No.xxx.'
+  copyright:
+    'Copyright © 2015 - 2018 by purearea.Ltd. All rights reserved.Shanghai ICP No.xxx. Shanghai Public Network Security No.xxx.'
 }

@@ -13,8 +13,8 @@
         </li>
       </ul>
     </div>
-    <swiper :options="swiperOption" ref="mySwiper">
-      <swiper-slide v-for="(item, index) in swiperSlides" v-bind:key="index">
+    <swiper :options="swiperOption" ref="mySwiper" class="swiper-wrap">
+      <swiper-slide v-for="(item, index) in swiperSlides" v-bind:key="index" class="min-height-slide">
         <img :src="item" class="swiper-img">
         <div class="title-wrap" v-show="index==0">
           <div class="pure-logo-wrap">
@@ -24,7 +24,7 @@
           <div class="title-righr-wrap">
             <p class="title-sm-txt">{{$t('smTitle')}}</p>
             <h2 class="title-large-txt">{{$t('largeTitle')}}</h2>
-            <button class="contact-us clear-btn">{{$t('contactBtn')}}</button>
+            <a href="mailto:purearea@126.com" class="contact-us">{{$t('contactBtn')}}</a>
           </div>
         </div>
       </swiper-slide>
@@ -34,7 +34,7 @@
       <div class="swiper-button-next swiper-button-white" slot="button-next"></div>
     </swiper>
     <div class="catalogue-wrap vel-flex">
-      <div v-for="(item, index) in $t('catalogue')" v-bind:key="index" class="catalogue-item vel-flex" @click="showFullMap(index)">
+      <div v-for="(item, index) in $t('catalogue')" v-bind:key="index" class="catalogue-item vel-flex" :class="index == swiper01Index && mapShow?'active':''" @click="showFullMap(index)">
         <span class="icon-wrap">
           <i :class="item.icon" class="iconfont com-icon"></i>
         </span>
@@ -45,7 +45,7 @@
       <p>{{$t('copyright')}}</p>
     </div>
     <div class="full-map" v-show="mapShow">
-      <swiper :options="swiper01Option" ref="mySwiper" class="swiper01-wrap">
+      <swiper :options="swiper01Option" ref="mySwiper01" class="swiper01-wrap">
         <swiper-slide v-for="(item, index) in $t('catalogue')" v-bind:key="index">
           <img :src="item.img" class="swiper-img">
           <span class="close-btn-wrap" @click="closeFullMap">
@@ -54,13 +54,22 @@
         </swiper-slide>
         <!-- Optional controls -->
         <div class="swiper-pagination" slot="pagination"></div>
-        <div slot="button-prev" class="left-arrow-wrap">
+        <div slot="button-prev" class="com-arrow-wrap left-arrow-wrap">
           <i class="iconfont icon-arrow"></i>
         </div>
-        <div slot="button-next" class="right-arrow-wrap">
-          <i class="iconfont icon-arrow arrow-right"></i>
+        <div slot="button-next" class="com-arrow-wrap right-arrow-wrap">
+          <i class="iconfont icon-arrow icon-right-arrow"></i>
         </div>
       </swiper>
+    </div>
+    <div class="full-map white-map" v-show="loadingShow">
+      <div class="loader">
+        <div class="dot"></div>
+        <div class="dot"></div>
+        <div class="dot"></div>
+        <div class="dot"></div>
+        <div class="dot"></div>
+      </div>
     </div>
   </div>
 </template>
@@ -77,26 +86,30 @@ export default {
     swiperSlide
   },
   data () {
+    const self = this
     return {
       curLocale: '',
+      swiper01Index: '-1',
       swiperOption: {
         // 是一个组件自有属性，意味着你可以在第一时间获取到swiper对象
         notNextTick: true,
         speed: 2000,
         autoplay: true,
-        loop: true,
-        pagination: '.swiper-pagination',
+        // loop: true,
         slidesPerView: 'auto',
         centeredSlides: true,
-        paginationClickable: true,
         navigation: {
           nextEl: '.swiper-button-next',
           prevEl: '.swiper-button-prev'
         },
-        onSlideChangeEnd: swiper => {
-          // 这个位置放swiper的回调方法
-          this.page = swiper.realIndex + 1
-          this.index = swiper.realIndex
+        updateOnImagesReady: true,
+        on: {
+          init: function () {
+            self.loadingShow = true
+          },
+          imagesReady: function () {
+            self.loadingShow = false
+          }
         }
       },
       swiperSlides: ['../static/swiper00.jpg', '../static/swiper01.jpg', '../static/swiper02.jpg'],
@@ -104,29 +117,37 @@ export default {
         notNextTick: true,
         effect: 'fade',
         speed: 300,
-        pagination: '.swiper-pagination',
+        autoplay: false,
         slidesPerView: 'auto',
         centeredSlides: true,
-        paginationClickable: true,
         navigation: {
-          nextEl: '.swiper-button-next',
-          prevEl: '.swiper-button-prev'
+          nextEl: '.right-arrow-wrap',
+          prevEl: '.left-arrow-wrap'
         },
-        onSlideChangeEnd: swiper => {
-          this.page = swiper.realIndex + 1
-          this.index = swiper.realIndex
+        on: {
+          transitionEnd: function () {
+            self.swiper01Index = this.activeIndex
+          }
         }
       },
-      mapShow: false
+      mapShow: false,
+      loadingShow: false
     }
   },
   computed: {
     swiper () {
       return this.$refs.mySwiper.swiper
+    },
+    swiper01 () {
+      return this.$refs.mySwiper01.swiper
     }
+  },
+  updated () {
+    this.swiper.update()
   },
   mounted () {
     this.swiper.slideTo(0, 0, false)
+    this.swiper01.slideTo(0, 0, false)
   },
   methods: {
     changeLocale () {
@@ -136,10 +157,12 @@ export default {
     },
     closeFullMap () {
       this.mapShow = false
+      this.swiper01Index = '-1'
     },
     showFullMap (index) {
-      console.log(index)
       this.mapShow = true
+      this.swiper.autoplay.stop()
+      this.swiper01.slideTo(index, 0, false)
     }
   }
 }
@@ -149,6 +172,20 @@ export default {
 <style scoped>
 .container {
   width: 100%;
+  position: relative;
+}
+.swiper-wrap {
+  background-color: #ccc;
+}
+.min-height-slide {
+  position: relative;
+  min-height: 694px;
+}
+.swiper-wrap:hover .swiper-button-white {
+  visibility: visible;
+}
+.swiper-button-white {
+  visibility: hidden;
 }
 .swiper-img {
   width: 100%;
@@ -240,6 +277,7 @@ pure-logo-txt::after {
   color: #fff;
   font-size: 16px;
   cursor: pointer;
+  text-align: center;
 }
 .contact-us:hover {
   background: #0066cc;
@@ -255,9 +293,10 @@ pure-logo-txt::after {
   flex-direction: column;
   cursor: pointer;
   justify-content: flex-start;
-  padding-top: 20px;
+  padding: 20px 5px 0 5px;
   box-sizing: border-box;
 }
+.catalogue-item.active,
 .catalogue-item:hover .com-icon,
 .catalogue-item:hover .icon-txt {
   color: #1896d6;
@@ -280,53 +319,122 @@ pure-logo-txt::after {
   text-align: center;
   padding-bottom: 30px;
 }
-.icon-en, .icon-zh{
+.icon-en,
+.icon-zh {
   color: #fff;
   font-size: 18px;
 }
-.logo-en-txt{
+.logo-en-txt {
   font-size: 13px;
 }
-.logo-zh-txt{
-   font-size: 18px;
+.logo-zh-txt {
+  font-size: 18px;
 }
-.full-map{
+.full-map {
   width: 100%;
   height: 100%;
-  position: absolute;
+  position: fixed;
   top: 0;
   left: 0;
-  background: rgb(0,0,0,0.5);
+  background: rgb(0, 0, 0, 0.5);
   z-index: 1000;
   display: flex;
   justify-content: center;
   align-items: center;
 }
-.swiper01-wrap{
-  width: 800px;
+.swiper01-wrap {
+  width: 70%;
+  /* height: 80%; */
 }
-.close-btn-wrap{
+.close-btn-wrap {
   position: absolute;
   top: 10px;
   right: 10px;
   cursor: pointer;
 }
-.close-btn-wrap:hover .icon-close{
+.close-btn-wrap:hover .icon-close {
   color: #000;
 }
-.icon-close{
+.icon-close {
   font-size: 25px;
   color: #666;
 }
-.com-arrow-wrap{
+.swiper01-wrap:hover .com-arrow-wrap {
+  visibility: visible;
+}
+.com-arrow-wrap {
   position: absolute;
   top: 50%;
   transform: translateY(-50%);
+  z-index: 1100;
+  color: #666;
+  cursor: pointer;
+  visibility: hidden;
 }
-.left-arrow-wrap{
+.com-arrow-wrap:hover {
+  color: #000;
+}
+.icon-arrow {
+  font-size: 20px;
+}
+.left-arrow-wrap {
   left: 10px;
 }
-.right-arrow-wrap{
+.right-arrow-wrap {
   right: 10px;
+}
+.icon-right-arrow {
+  display: block;
+  transform: rotate(180deg);
+}
+.white-map {
+  background: rgb(255, 255, 255, 0.9);
+}
+.loader {
+  position: absolute;
+  top: 50%;
+  left: 40%;
+  margin-left: 10%;
+  transform: translate3d(-50%, -50%, 0);
+}
+.dot {
+  width: 24px;
+  height: 24px;
+  background: #3ac;
+  border-radius: 100%;
+  display: inline-block;
+  animation: slide 1s infinite;
+}
+.dot:nth-child(1) {
+  animation-delay: 0.1s;
+  background: #32aacc;
+}
+.dot:nth-child(2) {
+  animation-delay: 0.2s;
+  background: #64aacc;
+}
+.dot:nth-child(3) {
+  animation-delay: 0.3s;
+  background: #96aacc;
+}
+.dot:nth-child(4) {
+  animation-delay: 0.4s;
+  background: #c8aacc;
+}
+.dot:nth-child(5) {
+  animation-delay: 0.5s;
+  background: #faaacc;
+}
+@keyframes slide {
+  0% {
+    transform: scale(1);
+  }
+  50% {
+    opacity: 0.6;
+    transform: scale(2);
+  }
+  100% {
+    transform: scale(1);
+  }
 }
 </style>
