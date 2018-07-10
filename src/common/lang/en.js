@@ -15,42 +15,42 @@ module.exports = {
     {
       icon: 'icon-purify',
       title: 'Whole house purification',
-      img: '../../static/img-purify.jpg'
+      img: '/static/img-purify.jpg'
     },
     {
       icon: 'icon-purification03',
       title: 'Duct type purifier',
-      img: '../../static/img-purification.jpg'
+      img: '/static/img-purification.jpg'
     },
     {
       icon: 'icon-filter',
       title: 'Filter',
-      img: '../../static/img-filter.jpg'
+      img: '/static/img-filter.jpg'
     },
     {
       icon: 'icon-intelligent01',
       title: 'Intelligent',
-      img: '../../static/img-intelligent.jpg'
+      img: '/static/img-intelligent.jpg'
     },
     {
       icon: 'icon-electrostatic',
       title: 'Micro electrostatic purifier',
-      img: '../../static/img-electrostatic.jpg'
+      img: '/static/img-electrostatic.jpg'
     },
     {
       icon: 'icon-newfan',
       title: 'Energy saving new fan',
-      img: '../../static/img-newfan.jpg'
+      img: '/static/img-newfan.jpg'
     },
     {
       icon: 'icon-ch2o02',
       title: 'Formaldehyde purification',
-      img: '../../static/img-ch2o.jpg'
+      img: '/static/img-ch2o.jpg'
     },
     {
       icon: 'icon-certification',
       title: 'Reset certification',
-      img: '../../static/img-certification.jpg'
+      img: '/static/img-certification.jpg'
     }
   ],
   copyright:

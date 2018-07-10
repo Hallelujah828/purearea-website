@@ -1,7 +1,7 @@
 <template>
   <div class="container">
     <div class="nav-wrap">
-      <img src="../../static/vcan-logo.png" class="nav-logo">
+      <img src="/static/vcan-logo.png" class="nav-logo">
       <ul class="nav-title">
         <li class="nav-title-item" v-for="(item, index) in $t('navTitles')" v-bind:key="index">
           {{item}}
@@ -18,7 +18,7 @@
         <img :src="item" class="swiper-img">
         <div class="title-wrap" v-show="index==0">
           <div class="pure-logo-wrap">
-            <img src="../../static/pure-logo.png" class="pure-logo">
+            <img src="/static/pure-logo.png" class="pure-logo">
             <p class="pure-logo-txt" :class="$t('curLogoTxt')">{{$t('logoTxt')}}</p>
           </div>
           <div class="title-righr-wrap">
