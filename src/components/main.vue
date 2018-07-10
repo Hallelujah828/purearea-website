@@ -46,8 +46,8 @@
     </div>
     <div class="full-map" v-show="mapShow">
       <swiper :options="swiper01Option" ref="mySwiper01" class="swiper01-wrap">
-        <swiper-slide v-for="(item, index) in $t('catalogue')" v-bind:key="index">
-          <img :src="item.img" class="swiper-img">
+        <swiper-slide v-for="(item, index) in catalogueImgs" v-bind:key="index">
+          <img :src="item" class="swiper-img">
           <span class="close-btn-wrap" @click="closeFullMap">
             <i class="iconfont icon-close"></i>
           </span>
@@ -78,6 +78,17 @@
 import 'swiper/dist/css/swiper.css'
 import { swiper, swiperSlide } from 'vue-awesome-swiper'
 import LangStorage from './../helpers/lang'
+const swiper0 = require('../../static/swiper00.jpg')
+const swiper01 = require('../../static/swiper01.jpg')
+const swiper02 = require('../../static/swiper02.jpg')
+const pop0 = require('../../static/img-purify.jpg')
+const pop01 = require('../../static/img-purification.jpg')
+const pop02 = require('../../static/img-filter.jpg')
+const pop03 = require('../../static/img-intelligent.jpg')
+const pop04 = require('../../static/img-electrostatic.jpg')
+const pop05 = require('../../static/img-newfan.jpg')
+const pop06 = require('../../static/img-ch2o.jpg')
+const pop07 = require('../../static/img-purify.jpg')
 
 export default {
   name: 'Main',
@@ -112,7 +123,7 @@ export default {
           }
         }
       },
-      swiperSlides: ['../static/swiper00.jpg', '../static/swiper01.jpg', '../static/swiper02.jpg'],
+      swiperSlides: [swiper0, swiper01, swiper02],
       swiper01Option: {
         notNextTick: true,
         effect: 'fade',
@@ -140,6 +151,9 @@ export default {
     },
     swiper01 () {
       return this.$refs.mySwiper01.swiper
+    },
+    catalogueImgs () {
+      return [pop0, pop01, pop02, pop03, pop04, pop05, pop06, pop07]
     }
   },
   updated () {
