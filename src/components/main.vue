@@ -1,7 +1,7 @@
 <template>
   <div class="container">
     <div class="nav-wrap">
-      <img src="/static/vcan-logo.png" class="nav-logo">
+      <img :src="vcanlogo" class="nav-logo">
       <ul class="nav-title">
         <li class="nav-title-item" v-for="(item, index) in $t('navTitles')" v-bind:key="index">
           {{item}}
@@ -18,7 +18,7 @@
         <img :src="item" class="swiper-img">
         <div class="title-wrap" v-show="index==0">
           <div class="pure-logo-wrap">
-            <img src="/static/pure-logo.png" class="pure-logo">
+            <img :src="purelogo" class="pure-logo">
             <p class="pure-logo-txt" :class="$t('curLogoTxt')">{{$t('logoTxt')}}</p>
           </div>
           <div class="title-righr-wrap">
@@ -89,6 +89,8 @@ const pop04 = require('../../static/img-electrostatic.jpg')
 const pop05 = require('../../static/img-newfan.jpg')
 const pop06 = require('../../static/img-ch2o.jpg')
 const pop07 = require('../../static/img-purify.jpg')
+const purelogo = require('../../static/pure-logo.png')
+const vcanlogo = require('../../static/vcan-logo.png')
 
 export default {
   name: 'Main',
@@ -100,6 +102,8 @@ export default {
     const self = this
     return {
       curLocale: '',
+      purelogo: purelogo,
+      vcanlogo: vcanlogo,
       swiper01Index: '-1',
       swiperOption: {
         // 是一个组件自有属性，意味着你可以在第一时间获取到swiper对象
