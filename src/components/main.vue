@@ -110,9 +110,9 @@ export default {
         // 是一个组件自有属性，意味着你可以在第一时间获取到swiper对象
         notNextTick: true,
         speed: 3500,
-        autoplay: {
-          delay: 5000
-        },
+        // autoplay: {
+        //   delay: 5000
+        // },
         // loop: true,
         slidesPerView: 'auto',
         centeredSlides: true,
@@ -124,8 +124,8 @@ export default {
         updateOnImagesReady: true,
         on: {
           init: function () {
-            this.autoplay.stop()
             self.loadingShow = true
+            this.autoplay.stop()
           },
           imagesReady: function () {
             self.loadingShow = false
