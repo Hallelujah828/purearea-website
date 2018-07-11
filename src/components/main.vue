@@ -15,7 +15,7 @@
     </div>
     <swiper :options="swiperOption" ref="mySwiper" class="swiper-wrap">
       <swiper-slide v-for="(item, index) in swiperSlides" v-bind:key="index" class="min-height-slide">
-        <img :src="item" class="swiper-img" @load="imageLoaded">
+        <img :src="item" class="swiper-img">
         <div class="title-wrap" v-show="index==0">
           <div class="pure-logo-wrap">
             <img :src="purelogo" class="pure-logo">
@@ -120,10 +120,16 @@ export default {
           nextEl: '.swiper-button-next',
           prevEl: '.swiper-button-prev'
         },
+        preloadImages: true,
+        updateOnImagesReady: true,
         on: {
           init: function () {
-            self.loadingShow = true
             this.autoplay.stop()
+            self.loadingShow = true
+          },
+          imagesReady: function () {
+            self.loadingShow = false
+            this.autoplay.start()
           }
         }
       },
@@ -182,10 +188,6 @@ export default {
       this.mapShow = true
       this.swiper.autoplay.stop()
       this.swiper01.slideTo(index, 0, false)
-    },
-    imageLoaded () {
-      this.loadingShow = false
-      this.swiper.autoplay.start()
     }
   }
 }
