@@ -15,7 +15,7 @@
     </div>
     <swiper :options="swiperOption" ref="mySwiper" class="swiper-wrap">
       <swiper-slide v-for="(item, index) in swiperSlides" v-bind:key="index" class="min-height-slide">
-        <img :src="item" class="swiper-img">
+        <img :src="item" class="swiper-img" @load="imageLoaded">
         <div class="title-wrap" v-show="index==0">
           <div class="pure-logo-wrap">
             <img :src="purelogo" class="pure-logo">
@@ -47,7 +47,8 @@
     <div class="full-map" v-show="mapShow">
       <swiper :options="swiper01Option" ref="mySwiper01" class="swiper01-wrap">
         <swiper-slide v-for="(item, index) in catalogueImgs" v-bind:key="index">
-          <img :src="item" class="swiper-img">
+          <img :data-src="item" class="swiper-img swiper-lazy">
+          <div class="swiper-lazy-preloader swiper-lazy-preloader-white"></div>
           <span class="close-btn-wrap" @click="closeFullMap">
             <i class="iconfont icon-close"></i>
           </span>
@@ -108,8 +109,10 @@ export default {
       swiperOption: {
         // 是一个组件自有属性，意味着你可以在第一时间获取到swiper对象
         notNextTick: true,
-        speed: 2000,
-        autoplay: true,
+        speed: 3500,
+        autoplay: {
+          delay: 5000
+        },
         // loop: true,
         slidesPerView: 'auto',
         centeredSlides: true,
@@ -117,13 +120,10 @@ export default {
           nextEl: '.swiper-button-next',
           prevEl: '.swiper-button-prev'
         },
-        updateOnImagesReady: true,
         on: {
           init: function () {
             self.loadingShow = true
-          },
-          imagesReady: function () {
-            self.loadingShow = false
+            this.autoplay.stop()
           }
         }
       },
@@ -138,6 +138,9 @@ export default {
         navigation: {
           nextEl: '.right-arrow-wrap',
           prevEl: '.left-arrow-wrap'
+        },
+        lazy: {
+          loadPrevNext: true
         },
         on: {
           transitionEnd: function () {
@@ -160,9 +163,6 @@ export default {
       return [pop0, pop01, pop02, pop03, pop04, pop05, pop06, pop07]
     }
   },
-  updated () {
-    this.swiper.update()
-  },
   mounted () {
     this.swiper.slideTo(0, 0, false)
     this.swiper01.slideTo(0, 0, false)
@@ -176,11 +176,16 @@ export default {
     closeFullMap () {
       this.mapShow = false
       this.swiper01Index = '-1'
+      this.swiper.autoplay.start()
     },
     showFullMap (index) {
       this.mapShow = true
       this.swiper.autoplay.stop()
       this.swiper01.slideTo(index, 0, false)
+    },
+    imageLoaded () {
+      this.loadingShow = false
+      this.swiper.autoplay.start()
     }
   }
 }
@@ -207,6 +212,8 @@ export default {
 }
 .swiper-img {
   width: 100%;
+  min-width: 700px;
+  min-height: 484px;
 }
 .nav-wrap {
   width: 100%;
@@ -362,7 +369,6 @@ pure-logo-txt::after {
 }
 .swiper01-wrap {
   width: 70%;
-  /* height: 80%; */
 }
 .close-btn-wrap {
   position: absolute;
