@@ -29,4 +29,20 @@ body {
     'Hiragino Sans GB', 'Heiti SC', 'Microsoft YaHei', 'WenQuanYi Micro Hei',
     sans-serif;
 }
+@media screen and (orientation: portrait) {
+  .main-wrap {
+    transform: rotate(90deg);
+    transform-origin: 0% 0%;
+    width: 100vh;
+    height: 100vw;
+    top: 0;
+    left: 100vw;
+    overflow: hidden;
+  }
+}
+@media screen and (orientation: landscape) {
+  .main-wrap {
+    transform: rotate(0);
+  }
+}
 </style>

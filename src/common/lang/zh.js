@@ -1,5 +1,26 @@
 module.exports = {
-  navTitles: ['历史品牌及战略', '维迈集团', 'Reset认证', '案例分析'],
+  navTitles: [
+    {
+      title: '历史品牌及战略',
+      url: 'javascript:void(0)',
+      target: '_self'
+    },
+    {
+      title: '维迈集团',
+      url: 'http://www.v-can.cn',
+      target: '_blank'
+    },
+    {
+      title: 'Reset认证',
+      url: 'https://reset.build',
+      target: '_blank'
+    },
+    {
+      title: '案例分析',
+      url: 'javascript:void(0)',
+      target: '_self'
+    }
+  ],
   curIcon: 'icon-en',
   curLogoTxt: 'logo-zh-txt',
   logoTxt: '空氣品質改良專家',
@@ -9,44 +30,37 @@ module.exports = {
   catalogue: [
     {
       icon: 'icon-purify',
-      title: '整屋净化',
-      img: '/static/img-purify.jpg'
+      title: '整屋净化'
     },
     {
       icon: 'icon-purification03',
-      title: '风管式净化器',
-      img: '/static/img-purification.jpg'
+      title: '风管式净化器'
     },
     {
       icon: 'icon-filter',
-      title: '过滤器',
-      img: '/static/img-filter.jpg'
+      title: '过滤器'
     },
     {
-      icon: 'icon-intelligent01',
-      title: '智能化',
-      img: '/static/img-intelligent.jpg'
+      icon: 'icon-intelligent',
+      title: '智能化'
     },
     {
       icon: 'icon-electrostatic',
-      title: '微静电净化器',
-      img: '/static/img-electrostatic.jpg'
+      title: '微静电净化器'
     },
     {
       icon: 'icon-newfan',
-      title: '节能新风机',
-      img: '/static/img-newfan.jpg'
+      title: '节能新风机'
     },
     {
       icon: 'icon-ch2o02',
-      title: '甲醛净化',
-      img: '/static/img-ch2o.jpg'
+      title: '甲醛净化'
     },
     {
       icon: 'icon-certification',
-      title: 'Reset认证',
-      img: '/static/img-certification.jpg'
+      title: 'Reset认证'
     }
   ],
-  copyright: '版权所有©2015 - 2018 维迈集团保留所有权利。沪ICP备XXXXXX号 沪公网安备XXXXXXX号。'
+  copyright:
+    '版权所有©2015 - 2018 维迈集团保留所有权利。沪ICP备XXXXXX号 沪公网安备XXXXXXX号。'
 }

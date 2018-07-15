@@ -1,75 +1,83 @@
 <template>
-  <div class="container">
-    <div class="nav-wrap">
-      <img :src="vcanlogo" class="nav-logo">
-      <ul class="nav-title">
-        <li class="nav-title-item" v-for="(item, index) in $t('navTitles')" v-bind:key="index">
-          {{item}}
-        </li>
-        <li class="nav-title-item" @click="changeLocale">
-          <span class="icon-wrap">
-            <i class="iconfont com-icon" :class="$t('curIcon')"></i>
-          </span>
-        </li>
-      </ul>
-    </div>
-    <swiper :options="swiperOption" ref="mySwiper" class="swiper-wrap">
-      <swiper-slide v-for="(item, index) in swiperSlides" v-bind:key="index" class="min-height-slide">
-        <img :src="item" class="swiper-img">
-        <div class="title-wrap" v-show="index==0">
-          <div class="pure-logo-wrap">
-            <img :src="purelogo" class="pure-logo">
-            <p class="pure-logo-txt" :class="$t('curLogoTxt')">{{$t('logoTxt')}}</p>
-          </div>
-          <div class="title-righr-wrap">
-            <p class="title-sm-txt">{{$t('smTitle')}}</p>
-            <h2 class="title-large-txt">{{$t('largeTitle')}}</h2>
-            <a href="mailto:purearea@126.com" class="contact-us">{{$t('contactBtn')}}</a>
-          </div>
-        </div>
-      </swiper-slide>
-      <!-- Optional controls -->
-      <div class="swiper-pagination" slot="pagination"></div>
-      <div class="swiper-button-prev swiper-button-white" slot="button-prev"></div>
-      <div class="swiper-button-next swiper-button-white" slot="button-next"></div>
-    </swiper>
-    <div class="catalogue-wrap vel-flex">
-      <div v-for="(item, index) in $t('catalogue')" v-bind:key="index" class="catalogue-item vel-flex" :class="index == swiper01Index && mapShow?'active':''" @click="showFullMap(index)">
-        <span class="icon-wrap">
-          <i :class="item.icon" class="iconfont com-icon"></i>
-        </span>
-        <p class="icon-txt">{{item.title}}</p>
+  <div class="main-wrap">
+    <div class="blur-bg" :style="{backgroundImage: 'url(' + bgimg + ')'}"></div>
+    <div class="container">
+      <div class="nav-wrap">
+        <img :src="vcanlogo" class="nav-logo">
+        <ul class="nav-title">
+          <a :href="item.url" :target="item.target" v-for="(item, index) in $t('navTitles')" v-bind:key="index">
+            <li class="nav-title-item">
+              {{item.title}}
+            </li>
+          </a>
+          <li class="nav-title-item" @click="changeLocale">
+            <span class="icon-wrap">
+              <i class="iconfont com-icon" :class="$t('curIcon')"></i>
+            </span>
+          </li>
+        </ul>
       </div>
-    </div>
-    <div class="copyright">
-      <p>{{$t('copyright')}}</p>
-    </div>
-    <div class="full-map" v-show="mapShow">
-      <swiper :options="swiper01Option" ref="mySwiper01" class="swiper01-wrap">
-        <swiper-slide v-for="(item, index) in catalogueImgs" v-bind:key="index">
-          <img :data-src="item" class="swiper-img swiper-lazy">
-          <div class="swiper-lazy-preloader swiper-lazy-preloader-white"></div>
-          <span class="close-btn-wrap" @click="closeFullMap">
-            <i class="iconfont icon-close"></i>
-          </span>
+      <swiper :options="swiperOption" ref="mySwiper" class="swiper-wrap">
+        <swiper-slide v-for="(item, index) in swiperSlides" v-bind:key="index" class="min-height-slide">
+          <img :src="item" class="swiper-img">
+          <div class="title-wrap" v-show="index==0">
+            <div class="pure-logo-wrap">
+              <img :src="purelogo" class="pure-logo">
+              <p class="pure-logo-txt" :class="$t('curLogoTxt')">{{$t('logoTxt')}}</p>
+            </div>
+            <div class="title-righr-wrap">
+              <p class="title-sm-txt">{{$t('smTitle')}}</p>
+              <h2 class="title-large-txt">{{$t('largeTitle')}}</h2>
+              <a href="mailto:purearea@126.com" class="contact-us">{{$t('contactBtn')}}</a>
+            </div>
+          </div>
         </swiper-slide>
         <!-- Optional controls -->
         <div class="swiper-pagination" slot="pagination"></div>
-        <div slot="button-prev" class="com-arrow-wrap left-arrow-wrap">
-          <i class="iconfont icon-arrow"></i>
-        </div>
-        <div slot="button-next" class="com-arrow-wrap right-arrow-wrap">
-          <i class="iconfont icon-arrow icon-right-arrow"></i>
-        </div>
+        <div class="swiper-button-prev swiper-button-white" slot="button-prev"></div>
+        <div class="swiper-button-next swiper-button-white" slot="button-next"></div>
       </swiper>
-    </div>
-    <div class="full-map white-map" v-show="loadingShow">
-      <div class="loader">
-        <div class="dot"></div>
-        <div class="dot"></div>
-        <div class="dot"></div>
-        <div class="dot"></div>
-        <div class="dot"></div>
+      <div class="catalogue-wrap vel-flex">
+        <div v-for="(item, index) in $t('catalogue')" v-bind:key="index" class="catalogue-item vel-flex" :class="index == swiper01Index && mapShow || curInd == index ? 'active':''" @click="showFullMap(index)" @mouseenter="enter(index)" @mouseleave="leave">
+          <span class="icon-wrap" v-if="index!==$t('catalogue').length-1">
+            <i :class="item.icon" class="iconfont com-icon"></i>
+          </span>
+          <span class="icon-wrap" v-if="index==$t('catalogue').length-1">
+            <img :src="resetImg" class="reset-logo">
+          </span>
+          <p class="icon-txt">{{item.title}}</p>
+        </div>
+      </div>
+      <div class="copyright">
+        <p>{{$t('copyright')}}</p>
+      </div>
+      <div class="full-map" v-show="mapShow">
+        <swiper :options="swiper01Option" ref="mySwiper01" class="swiper01-wrap">
+          <swiper-slide v-for="(item, index) in catalogueImgs" v-bind:key="index">
+            <img :data-src="item" class="swiper-img swiper-lazy">
+            <div class="swiper-lazy-preloader swiper-lazy-preloader-white"></div>
+            <span class="close-btn-wrap" @click="closeFullMap">
+              <i class="iconfont icon-close"></i>
+            </span>
+          </swiper-slide>
+          <!-- Optional controls -->
+          <div class="swiper-pagination" slot="pagination"></div>
+          <div slot="button-prev" class="com-arrow-wrap left-arrow-wrap">
+            <i class="iconfont icon-arrow"></i>
+          </div>
+          <div slot="button-next" class="com-arrow-wrap right-arrow-wrap">
+            <i class="iconfont icon-arrow icon-right-arrow"></i>
+          </div>
+        </swiper>
+      </div>
+      <div class="full-map white-map" v-show="loadingShow">
+        <div class="loader">
+          <div class="dot"></div>
+          <div class="dot"></div>
+          <div class="dot"></div>
+          <div class="dot"></div>
+          <div class="dot"></div>
+        </div>
       </div>
     </div>
   </div>
@@ -82,6 +90,7 @@ import LangStorage from './../helpers/lang'
 const swiper0 = require('../../static/swiper00.jpg')
 const swiper01 = require('../../static/swiper01.jpg')
 const swiper02 = require('../../static/swiper02.jpg')
+const swiper03 = require('../../static/swiper03.jpg')
 const pop0 = require('../../static/img-purify.jpg')
 const pop01 = require('../../static/img-purification.jpg')
 const pop02 = require('../../static/img-filter.jpg')
@@ -92,6 +101,9 @@ const pop06 = require('../../static/img-ch2o.jpg')
 const pop07 = require('../../static/img-purify.jpg')
 const purelogo = require('../../static/pure-logo.png')
 const vcanlogo = require('../../static/vcan-logo.png')
+const resetblack = require('../../static/reset-black.png')
+const resetblue = require('../../static/reset-blue.png')
+const bgimg = require('../../static/bg-img.jpg')
 
 export default {
   name: 'Main',
@@ -102,18 +114,19 @@ export default {
   data () {
     const self = this
     return {
+      curInd: -1,
+      bgimg: bgimg,
       curLocale: '',
+      resetImg: resetblack,
+      resetblue: resetblue,
+      resetblack: resetblack,
       purelogo: purelogo,
       vcanlogo: vcanlogo,
-      swiper01Index: '-1',
+      swiper01Index: -1,
       swiperOption: {
         // 是一个组件自有属性，意味着你可以在第一时间获取到swiper对象
         notNextTick: true,
         speed: 3500,
-        // autoplay: {
-        //   delay: 5000
-        // },
-        // loop: true,
         slidesPerView: 'auto',
         centeredSlides: true,
         navigation: {
@@ -133,7 +146,7 @@ export default {
           }
         }
       },
-      swiperSlides: [swiper0, swiper01, swiper02],
+      swiperSlides: [swiper0, swiper01, swiper02, swiper03],
       swiper01Option: {
         notNextTick: true,
         effect: 'fade',
@@ -181,13 +194,27 @@ export default {
     },
     closeFullMap () {
       this.mapShow = false
-      this.swiper01Index = '-1'
+      this.swiper01Index = -1
       this.swiper.autoplay.start()
+      this.resetImg = this.resetblack
     },
     showFullMap (index) {
       this.mapShow = true
       this.swiper.autoplay.stop()
       this.swiper01.slideTo(index, 0, false)
+      if (index === 7) {
+        this.resetImg = this.resetblue
+      }
+    },
+    enter (index) {
+      this.curInd = index
+      if (index === 7) {
+        this.resetImg = this.resetblue
+      }
+    },
+    leave () {
+      this.curInd = -1
+      this.resetImg = this.resetblack
     }
   }
 }
@@ -196,8 +223,9 @@ export default {
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
 .container {
-  width: 100%;
+  width: 1000px;
   position: relative;
+  margin: 0 auto;
 }
 .swiper-wrap {
   background-color: #ccc;
@@ -229,6 +257,7 @@ export default {
   top: 0;
   left: 0;
   z-index: 999;
+  background: rgba(0, 0, 0, 0.5);
 }
 .nav-logo {
   width: 100px;
@@ -323,9 +352,10 @@ pure-logo-txt::after {
   padding: 20px 5px 0 5px;
   box-sizing: border-box;
 }
-.catalogue-item.active,
-.catalogue-item:hover .com-icon,
-.catalogue-item:hover .icon-txt {
+
+/* .catalogue-item:hover .com-icon,
+.catalogue-item:hover .icon-txt, */
+.catalogue-item.active {
   color: #1896d6;
 }
 .catalogue-item:not(:last-child) {
@@ -462,5 +492,21 @@ pure-logo-txt::after {
   100% {
     transform: scale(1);
   }
+}
+.reset-logo {
+  height: 30px;
+}
+.main-wrap {
+  position: relative;
+}
+.blur-bg {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  z-index: -1;
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center;
+  filter: blur(2px);
 }
 </style>

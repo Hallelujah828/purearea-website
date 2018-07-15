@@ -1,10 +1,11 @@
 @font-face {
-  font-family: 'iconfont';  /* project id 738171 */
+  font-family: 'iconfont'; /* project id 738171 */
   src: url('//at.alicdn.com/t/font_738171_ji4f1zpg8i.eot');
-  src: url('//at.alicdn.com/t/font_738171_ji4f1zpg8i.eot?#iefix') format('embedded-opentype'),
-  url('//at.alicdn.com/t/font_738171_ji4f1zpg8i.woff') format('woff'),
-  url('//at.alicdn.com/t/font_738171_ji4f1zpg8i.ttf') format('truetype'),
-  url('//at.alicdn.com/t/font_738171_ji4f1zpg8i.svg#iconfont') format('svg');
+  src: url('//at.alicdn.com/t/font_738171_ji4f1zpg8i.eot?#iefix')
+      format('embedded-opentype'),
+    url('//at.alicdn.com/t/font_738171_ji4f1zpg8i.woff') format('woff'),
+    url('//at.alicdn.com/t/font_738171_ji4f1zpg8i.ttf') format('truetype'),
+    url('//at.alicdn.com/t/font_738171_ji4f1zpg8i.svg#iconfont') format('svg');
 }
 
 .iconfont {
@@ -17,46 +18,16 @@
 }
 
 .icon-intelligent:before {
-  content: '\e606';
-}
-.icon-intelligent01:before {
   content: '\e633';
-}
-.icon-intelligent02:before {
-  content: '\e626';
-}
-.icon-purification:before {
-  content: '\e632';
-}
-.icon-purification01:before {
-  content: '\e60f';
-}
-.icon-purification02:before {
-  content: '\e938';
 }
 .icon-purification03:before {
   content: '\e6f5';
 }
-.icon-purification04:before {
-  content: '\e630';
-}
 .icon-purify:before {
   content: '\e672';
 }
-.icon-purify01:before {
-  content: '\e605';
-}
-.icon-purify02:before {
-  content: '\e7e0';
-}
-.icon-purify02:before {
-  content: '\e6f8';
-}
 .icon-filter:before {
   content: '\e636';
-}
-.icon-filter01:before {
-  content: '\e600';
 }
 .icon-close:before {
   content: '\e6d3';
@@ -64,41 +35,17 @@
 .icon-certification:before {
   content: '\e653';
 }
-.icon-certification01:before {
-  content: '\e645';
-}
-.icon-certification02:before {
-  content: '\e615';
-}
 .icon-electrostatic:before {
   content: '\e9df';
 }
-.icon-ch2o:before {
-  content: '\e60c';
-}
-.icon-ch2o01:before {
-  content: '\e604';
-}
 .icon-ch2o02:before {
   content: '\e601';
-}
-.icon-vacuum:before {
-  content: '\e617';
-}
-.icon-vacuum01:before {
-  content: '\e60d';
 }
 .icon-newfan:before {
   content: '\e602';
 }
 .icon-arrow:before {
   content: '\e66a';
-}
-.icon-save:before {
-  content: '\e6f8';
-}
-.icon-save01:before {
-  content: '\e6a6';
 }
 .icon-en:before {
   content: '\e79c';
