@@ -37,7 +37,6 @@ body {
     height: 100vw;
     top: 0;
     left: 100vw;
-    overflow: hidden;
   }
 }
 @media screen and (orientation: landscape) {
