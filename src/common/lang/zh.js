@@ -1,7 +1,7 @@
 module.exports = {
   navTitles: [
     {
-      title: '历史品牌及战略',
+      title: '品牌及历史',
       url: 'javascript:void(0)',
       target: '_self'
     },
@@ -14,16 +14,14 @@ module.exports = {
       title: 'Reset认证',
       url: 'https://reset.build',
       target: '_blank'
-    },
-    {
-      title: '案例分析',
-      url: 'javascript:void(0)',
-      target: '_self'
     }
+    // {
+    //   title: '案例分析',
+    //   url: 'javascript:void(0)',
+    //   target: '_self'
+    // }
   ],
   curIcon: 'icon-en',
-  curLogoTxt: 'logo-zh-txt',
-  logoTxt: '空氣品質改良專家',
   smTitle: '室内空气治理',
   largeTitle: '综合解决方案',
   contactBtn: '联系我们',
@@ -38,7 +36,7 @@ module.exports = {
     },
     {
       icon: 'icon-filter',
-      title: '过滤器'
+      title: '净化产品'
     },
     {
       icon: 'icon-intelligent',

@@ -5,7 +5,7 @@
       <div class="nav-wrap">
         <img :src="vcanlogo" class="nav-logo">
         <ul class="nav-title">
-          <a :href="item.url" :target="item.target" v-for="(item, index) in $t('navTitles')" v-bind:key="index">
+          <a :href="item.url" :target="item.target" v-for="(item, index) in $t('navTitles')" v-bind:key="index" @click="showHistory(index)" class="flex-nav-txt">
             <li class="nav-title-item">
               {{item.title}}
             </li>
@@ -23,12 +23,12 @@
           <div class="title-wrap" v-show="index==0">
             <div class="pure-logo-wrap">
               <img :src="purelogo" class="pure-logo">
-              <p class="pure-logo-txt" :class="$t('curLogoTxt')">{{$t('logoTxt')}}</p>
+              <p class="pure-logo-txt">空氣品質改良專家</p>
             </div>
             <div class="title-righr-wrap">
               <p class="title-sm-txt">{{$t('smTitle')}}</p>
               <h2 class="title-large-txt">{{$t('largeTitle')}}</h2>
-              <a href="mailto:purearea@126.com" class="contact-us">{{$t('contactBtn')}}</a>
+              <a href="mailto:purearea@purearea.com.cn?cc=jun.xu@purearea.com.cn&cc=dawei.liu@purearea.com" class="contact-us">{{$t('contactBtn')}}</a>
             </div>
           </div>
         </swiper-slide>
@@ -56,6 +56,12 @@
           <swiper-slide v-for="(item, index) in catalogueImgs" v-bind:key="index">
             <img :data-src="item" class="swiper-img swiper-lazy">
             <div class="swiper-lazy-preloader swiper-lazy-preloader-white"></div>
+            <a href="http://7xrc2h.com1.z0.glb.clouddn.com/Purearea%20Brochure%20V1.2.pdf" download="Purearea" class="download-wrap">
+              <span class="close-btn-wrap download-btn">
+                <i class="iconfont icon-download"></i>
+              </span>
+              <span class="download-txt">查看更多</span>
+            </a>
             <span class="close-btn-wrap" @click="closeFullMap">
               <i class="iconfont icon-close"></i>
             </span>
@@ -79,6 +85,20 @@
           <div class="dot"></div>
         </div>
       </div>
+      <div class="full-map" v-show="showHistoryMap">
+        <div class="history-wrap">
+          <img :src="history" class="history-img">
+          <a href="http://7xrc2h.com1.z0.glb.clouddn.com/Purearea%20Brochure%20V1.2.pdf" download="Purearea" class="download-wrap">
+            <span class="close-btn-wrap download-btn">
+              <i class="iconfont icon-download"></i>
+            </span>
+            <span class="download-txt">查看更多</span>
+          </a>
+          <span class="close-btn-wrap" @click="closeHistory">
+            <i class="iconfont icon-close"></i>
+          </span>
+        </div>
+      </div>
     </div>
   </div>
 </template>
@@ -87,10 +107,10 @@
 import 'swiper/dist/css/swiper.css'
 import { swiper, swiperSlide } from 'vue-awesome-swiper'
 import LangStorage from './../helpers/lang'
-const swiper0 = require('../../static/swiper00.jpg')
+const swiper0 = require('../../static/swiper00.jpeg')
 const swiper01 = require('../../static/swiper01.jpg')
 const swiper02 = require('../../static/swiper02.jpg')
-const swiper03 = require('../../static/swiper03.jpg')
+const history = require('../../static/swiper03.jpg')
 const pop0 = require('../../static/img-purify.jpg')
 const pop01 = require('../../static/img-purification.jpg')
 const pop02 = require('../../static/img-filter.jpg')
@@ -98,12 +118,12 @@ const pop03 = require('../../static/img-intelligent.jpg')
 const pop04 = require('../../static/img-electrostatic.jpg')
 const pop05 = require('../../static/img-newfan.jpg')
 const pop06 = require('../../static/img-ch2o.jpg')
-const pop07 = require('../../static/img-purify.jpg')
+const pop07 = require('../../static/img-certification.jpg')
 const purelogo = require('../../static/pure-logo.png')
 const vcanlogo = require('../../static/vcan-logo.png')
 const resetblack = require('../../static/reset-black.png')
 const resetblue = require('../../static/reset-blue.png')
-const bgimg = require('../../static/bg-img.jpg')
+const bgimg = require('../../static/bg-img.png')
 
 export default {
   name: 'Main',
@@ -114,6 +134,9 @@ export default {
   data () {
     const self = this
     return {
+      showTip: false,
+      showHistoryMap: false,
+      history: history,
       curInd: -1,
       bgimg: bgimg,
       curLocale: '',
@@ -146,7 +169,7 @@ export default {
           }
         }
       },
-      swiperSlides: [swiper0, swiper01, swiper02, swiper03],
+      swiperSlides: [swiper0, swiper01, swiper02],
       swiper01Option: {
         notNextTick: true,
         effect: 'fade',
@@ -179,7 +202,7 @@ export default {
       return this.$refs.mySwiper01.swiper
     },
     catalogueImgs () {
-      return [pop0, pop01, pop02, pop03, pop04, pop05, pop06, pop07]
+      return [pop05, pop01, pop02, pop03, pop04, pop06, pop0, pop07]
     }
   },
   mounted () {
@@ -206,6 +229,9 @@ export default {
         this.resetImg = this.resetblue
       }
     },
+    closeHistory () {
+      this.showHistoryMap = false
+    },
     enter (index) {
       this.curInd = index
       if (index === 7) {
@@ -215,6 +241,17 @@ export default {
     leave () {
       this.curInd = -1
       this.resetImg = this.resetblack
+    },
+    showHistory (index) {
+      if (index === 0) {
+        this.showHistoryMap = true
+      }
+    },
+    enterDownLoad () {
+      this.showTip = true
+    },
+    leaveDownLoad () {
+      this.showTip = false
     }
   }
 }
@@ -222,10 +259,42 @@ export default {
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
+@media screen and (min-width: 1024px) {
+  .container {
+    width: 1008px;
+  }
+}
+@media screen and (min-width: 1100px) {
+  .container {
+    width: 1008px;
+  }
+}
+@media screen and (min-width: 1366px) {
+  .container {
+    width: 1008px;
+  }
+}
+@media screen and (min-width: 1440px) {
+  .container {
+    width: 1008px;
+  }
+}
+@media screen and (min-width: 1680px) {
+  .container {
+    width: 1008px;
+  }
+}
+@media screen and (min-width: 1920px) {
+  .container {
+    width: 1190px;
+  }
+}
 .container {
-  width: 1000px;
+  min-width: 1000px;
+  min-height: 100vh;
   position: relative;
   margin: 0 auto;
+  background: #fff;
 }
 .swiper-wrap {
   background-color: #ccc;
@@ -244,6 +313,9 @@ export default {
   width: 100%;
   min-width: 700px;
   min-height: 484px;
+  border-bottom: 1px solid #eee;
+  box-sizing: border-box;
+  display: block;
 }
 .nav-wrap {
   width: 100%;
@@ -253,11 +325,7 @@ export default {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  position: absolute;
-  top: 0;
-  left: 0;
-  z-index: 999;
-  background: rgba(0, 0, 0, 0.5);
+  background: #000;
 }
 .nav-logo {
   width: 100px;
@@ -336,7 +404,7 @@ pure-logo-txt::after {
   text-align: center;
 }
 .contact-us:hover {
-  background: #0066cc;
+  background: rgba(24, 150, 214, 0.8);
 }
 .catalogue-wrap {
   width: 100%;
@@ -368,6 +436,7 @@ pure-logo-txt::after {
   font-size: 12px;
   margin-top: 10px;
   text-align: center;
+  line-height: 1.2;
 }
 .copyright {
   width: 100%;
@@ -399,8 +468,14 @@ pure-logo-txt::after {
   justify-content: center;
   align-items: center;
 }
-.swiper01-wrap {
-  width: 70%;
+.swiper01-wrap,
+.history-wrap {
+  width: 65%;
+  min-width: 800px;
+  position: relative;
+}
+.history-img {
+  width: 100%;
 }
 .close-btn-wrap {
   position: absolute;
@@ -408,7 +483,8 @@ pure-logo-txt::after {
   right: 10px;
   cursor: pointer;
 }
-.close-btn-wrap:hover .icon-close {
+.icon-close:hover,
+.icon-download:hover {
   color: #000;
 }
 .icon-close {
@@ -495,9 +571,11 @@ pure-logo-txt::after {
 }
 .reset-logo {
   height: 30px;
+  display: block;
 }
 .main-wrap {
   position: relative;
+  min-height: 100%;
 }
 .blur-bg {
   position: absolute;
@@ -507,6 +585,31 @@ pure-logo-txt::after {
   background-size: cover;
   background-repeat: no-repeat;
   background-position: center;
-  filter: blur(2px);
+}
+.download-btn {
+  right: 50px;
+}
+.icon-download {
+  font-size: 26px;
+  color: #666;
+}
+.download-txt {
+  position: absolute;
+  color: #000;
+  font-size: 12px;
+  top: 0;
+  right: 90px;
+  height: 45px;
+  line-height: 45px;
+  z-index: 1000;
+  opacity: 0;
+  transition: opacity 1s;
+}
+.download-wrap:hover .download-txt {
+  opacity: 1;
+}
+.flex-nav-txt {
+  display: flex;
+  align-items: center;
 }
 </style>

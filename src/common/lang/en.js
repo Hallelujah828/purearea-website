@@ -1,44 +1,42 @@
 module.exports = {
   navTitles: [
     {
-      title: 'Historical brand and strategy',
+      title: 'About PUREAREA',
       url: 'javascript:void(0)',
       target: '_self'
     },
     {
-      title: 'V·CAN group',
+      title: 'V-CAN Group',
       url: 'http://www.v-can.cn',
       target: '_blank'
     },
     {
-      title: 'Reset certification',
+      title: 'RESET Certification',
       url: 'http://reset.build',
       target: '_blank'
-    },
-    {
-      title: 'Case analysis',
-      url: 'javascript:void(0)',
-      target: '_self'
     }
+    // {
+    //   title: 'Case analysis',
+    //   url: 'javascript:void(0)',
+    //   target: '_self'
+    // }
   ],
   curIcon: 'icon-zh',
-  curLogoTxt: 'logo-en-txt',
-  logoTxt: 'Air Quality Improvement Expert',
-  smTitle: 'Indoor Air Treatment',
-  largeTitle: 'Integrated Solution',
-  contactBtn: 'Contact us',
+  smTitle: 'Indoor Air Quality',
+  largeTitle: 'Total Solution',
+  contactBtn: 'Contact Us',
   catalogue: [
     {
       icon: 'icon-purify',
-      title: 'Whole house purification'
+      title: 'Whole House Purification'
     },
     {
       icon: 'icon-purification03',
-      title: 'Duct type purifier'
+      title: 'Ducting Type Purifier'
     },
     {
       icon: 'icon-filter',
-      title: 'Filter'
+      title: 'Purification Products'
     },
     {
       icon: 'icon-intelligent',
@@ -46,21 +44,21 @@ module.exports = {
     },
     {
       icon: 'icon-electrostatic',
-      title: 'Micro electrostatic purifier'
+      title: 'Micro Electrostatic Tech'
     },
     {
       icon: 'icon-newfan',
-      title: 'Energy saving new fan'
+      title: 'Energy Saving Fresh Air System'
     },
     {
       icon: 'icon-ch2o02',
-      title: 'Formaldehyde purification'
+      title: 'Formaldehyde Remediation'
     },
     {
       icon: 'icon-certification',
-      title: 'Reset certification'
+      title: 'Reset Certification'
     }
   ],
   copyright:
-    'Copyright © 2015 - 2018 by purearea.Ltd. All rights reserved.Shanghai ICP No.xxx. Shanghai Public Network Security No.xxx.'
+    'Copyright © 2015 - 2018 by V-CAN Group. All rights reserved.Shanghai ICP No.xxx. Shanghai Public Network Security No.xxx.'
 }

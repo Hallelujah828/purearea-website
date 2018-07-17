@@ -1,11 +1,11 @@
 @font-face {
   font-family: 'iconfont'; /* project id 738171 */
-  src: url('//at.alicdn.com/t/font_738171_ji4f1zpg8i.eot');
-  src: url('//at.alicdn.com/t/font_738171_ji4f1zpg8i.eot?#iefix')
+  src: url('//at.alicdn.com/t/font_738171_mgh2g3gkrgj.eot');
+  src: url('//at.alicdn.com/t/font_738171_mgh2g3gkrgj.eot?#iefix')
       format('embedded-opentype'),
-    url('//at.alicdn.com/t/font_738171_ji4f1zpg8i.woff') format('woff'),
-    url('//at.alicdn.com/t/font_738171_ji4f1zpg8i.ttf') format('truetype'),
-    url('//at.alicdn.com/t/font_738171_ji4f1zpg8i.svg#iconfont') format('svg');
+    url('//at.alicdn.com/t/font_738171_mgh2g3gkrgj.woff') format('woff'),
+    url('//at.alicdn.com/t/font_738171_mgh2g3gkrgj.ttf') format('truetype'),
+    url('//at.alicdn.com/t/font_738171_mgh2g3gkrgj.svg#iconfont') format('svg');
 }
 
 .iconfont {
@@ -52,4 +52,7 @@
 }
 .icon-zh:before {
   content: '\e7a0';
+}
+.icon-download:before {
+  content: '\e63b';
 }
