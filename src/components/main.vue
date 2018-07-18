@@ -261,12 +261,12 @@ export default {
 <style scoped>
 @media screen and (min-width: 1024px) {
   .container {
-    width: 1008px;
+    width: 1000px;
   }
 }
 @media screen and (min-width: 1100px) {
   .container {
-    width: 1008px;
+    width: 1000px;
   }
 }
 @media screen and (min-width: 1366px) {
@@ -286,7 +286,7 @@ export default {
 }
 @media screen and (min-width: 1920px) {
   .container {
-    width: 1190px;
+    width: 1100px;
   }
 }
 .container {
