@@ -60,5 +60,5 @@ module.exports = {
     }
   ],
   copyright:
-    'Copyright © 2015 - 2018 by V-CAN Group. All rights reserved.Shanghai ICP No.xxx. Shanghai Public Network Security No.xxx.'
+    '版权所有©2015 - 2018上海桦寅环保科技有限公司。沪ICP备18027631号-1。'
 }

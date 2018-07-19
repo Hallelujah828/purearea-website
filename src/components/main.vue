@@ -49,7 +49,7 @@
         </div>
       </div>
       <div class="copyright">
-        <p>{{$t('copyright')}}</p>
+        <p>版权所有©2015 - {{curYear}}上海桦寅环保科技有限公司。沪ICP备18027631号-1。</p>
       </div>
       <div class="full-map" v-show="mapShow">
         <swiper :options="swiper01Option" ref="mySwiper01" class="swiper01-wrap">
@@ -134,6 +134,7 @@ export default {
   data () {
     const self = this
     return {
+      curYear: '',
       showTip: false,
       showHistoryMap: false,
       history: history,
@@ -208,6 +209,7 @@ export default {
   mounted () {
     this.swiper.slideTo(0, 0, false)
     this.swiper01.slideTo(0, 0, false)
+    this.curYear = new Date().getFullYear()
   },
   methods: {
     changeLocale () {
