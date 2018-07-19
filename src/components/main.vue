@@ -595,15 +595,16 @@ pure-logo-txt::after {
 }
 .download-txt {
   position: absolute;
-  color: #000;
+  color: #fff;
+  background-color: #666;
   font-size: 12px;
-  top: 0;
+  top: 12px;
   right: 90px;
-  height: 45px;
-  line-height: 45px;
   z-index: 1000;
   opacity: 0;
   transition: opacity 1s;
+  padding: 5px;
+  border-radius: 4px;
 }
 .download-wrap:hover .download-txt {
   opacity: 1;
