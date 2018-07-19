@@ -261,37 +261,8 @@ export default {
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
-@media screen and (min-width: 1024px) {
-  .container {
-    width: 1000px;
-  }
-}
-@media screen and (min-width: 1100px) {
-  .container {
-    width: 1000px;
-  }
-}
-@media screen and (min-width: 1366px) {
-  .container {
-    width: 1008px;
-  }
-}
-@media screen and (min-width: 1440px) {
-  .container {
-    width: 1008px;
-  }
-}
-@media screen and (min-width: 1680px) {
-  .container {
-    width: 1008px;
-  }
-}
-@media screen and (min-width: 1920px) {
-  .container {
-    width: 1100px;
-  }
-}
 .container {
+  width: 1000px;
   min-width: 1000px;
   min-height: 100vh;
   position: relative;
@@ -472,8 +443,7 @@ pure-logo-txt::after {
 }
 .swiper01-wrap,
 .history-wrap {
-  width: 65%;
-  min-width: 800px;
+  width: 100%;
   position: relative;
 }
 .history-img {
