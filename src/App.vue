@@ -25,7 +25,7 @@ export default {
 @import '../src/styles/icon.css';
 body {
   min-width: 1000px;
-  font-family: 'Roboto', 'Helvetica Neue', Helvetica, Arial, 'PingFang SC',
+  font-family: 'Helvetica Neue', Helvetica, Arial, 'PingFang SC',
     'Hiragino Sans GB', 'Heiti SC', 'Microsoft YaHei', 'WenQuanYi Micro Hei',
     sans-serif;
 }

@@ -19,7 +19,7 @@
       </div>
       <swiper :options="swiperOption" ref="mySwiper" class="swiper-wrap">
         <swiper-slide v-for="(item, index) in swiperSlides" v-bind:key="index" class="min-height-slide">
-          <img :src="item" class="swiper-img">
+          <img :src="item" class="swiper-img" @click="downloadPdf(index)">
           <div class="title-wrap" v-show="index==0">
             <div class="pure-logo-wrap">
               <img :src="purelogo" class="pure-logo">
@@ -53,7 +53,7 @@
       </div>
       <div class="full-map" v-show="mapShow">
         <swiper :options="swiper01Option" ref="mySwiper01" class="swiper01-wrap">
-          <swiper-slide v-for="(item, index) in catalogueImgs" v-bind:key="index">
+          <swiper-slide v-for="(item, index) in catalogueImgs" v-bind:key="index" class="swiper-no-swiping">
             <img :data-src="item" class="swiper-img swiper-lazy">
             <div class="swiper-lazy-preloader swiper-lazy-preloader-white"></div>
             <a href="http://7xrc2h.com1.z0.glb.clouddn.com/Purearea%20Brochure%20V1.2.pdf" download="Purearea" class="download-wrap">
@@ -150,6 +150,7 @@ export default {
       swiperOption: {
         // 是一个组件自有属性，意味着你可以在第一时间获取到swiper对象
         notNextTick: true,
+        preventLinksPropagation: true,
         speed: 3500,
         slidesPerView: 'auto',
         centeredSlides: true,
@@ -172,6 +173,7 @@ export default {
       },
       swiperSlides: [swiper0, swiper01, swiper02],
       swiper01Option: {
+        noSwiping: true,
         notNextTick: true,
         effect: 'fade',
         speed: 300,
@@ -254,6 +256,11 @@ export default {
     },
     leaveDownLoad () {
       this.showTip = false
+    },
+    downloadPdf (index) {
+      if (index !== 0) {
+        window.open('http://7xrc2h.com1.z0.glb.clouddn.com/Purearea%20Brochure%20V1.2.pdf')
+      }
     }
   }
 }
