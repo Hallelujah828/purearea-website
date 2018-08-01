@@ -51,53 +51,53 @@
       <div class="copyright">
         <p>版权所有©2015 - {{curYear}}上海桦寅环保科技有限公司。沪ICP备18027631号-1。</p>
       </div>
-      <div class="full-map" v-show="mapShow">
-        <swiper :options="swiper01Option" ref="mySwiper01" class="swiper01-wrap">
-          <swiper-slide v-for="(item, index) in catalogueImgs" v-bind:key="index" class="swiper-no-swiping">
-            <img :data-src="item" class="swiper-img swiper-lazy">
-            <div class="swiper-lazy-preloader swiper-lazy-preloader-white"></div>
-            <a href="http://7xrc2h.com1.z0.glb.clouddn.com/Purearea%20Brochure%20V1.2.pdf" download="Purearea" class="download-wrap">
-              <span class="close-btn-wrap download-btn">
-                <i class="iconfont icon-download"></i>
-              </span>
-              <span class="download-txt">查看更多</span>
-            </a>
-            <span class="close-btn-wrap" @click="closeFullMap">
-              <i class="iconfont icon-close"></i>
-            </span>
-          </swiper-slide>
-          <!-- Optional controls -->
-          <div class="swiper-pagination" slot="pagination"></div>
-          <div slot="button-prev" class="com-arrow-wrap left-arrow-wrap">
-            <i class="iconfont icon-arrow"></i>
-          </div>
-          <div slot="button-next" class="com-arrow-wrap right-arrow-wrap">
-            <i class="iconfont icon-arrow icon-right-arrow"></i>
-          </div>
-        </swiper>
-      </div>
-      <div class="full-map white-map" v-show="loadingShow">
-        <div class="loader">
-          <div class="dot"></div>
-          <div class="dot"></div>
-          <div class="dot"></div>
-          <div class="dot"></div>
-          <div class="dot"></div>
-        </div>
-      </div>
-      <div class="full-map" v-show="showHistoryMap">
-        <div class="history-wrap">
-          <img :src="history" class="history-img">
+    </div>
+    <div class="full-map" v-show="mapShow">
+      <swiper :options="swiper01Option" ref="mySwiper01" class="swiper01-wrap">
+        <swiper-slide v-for="(item, index) in catalogueImgs" v-bind:key="index" class="swiper-no-swiping">
+          <img :data-src="item" class="swiper-img swiper-lazy">
+          <div class="swiper-lazy-preloader swiper-lazy-preloader-white"></div>
           <a href="http://7xrc2h.com1.z0.glb.clouddn.com/Purearea%20Brochure%20V1.2.pdf" download="Purearea" class="download-wrap">
             <span class="close-btn-wrap download-btn">
               <i class="iconfont icon-download"></i>
             </span>
             <span class="download-txt">查看更多</span>
           </a>
-          <span class="close-btn-wrap" @click="closeHistory">
+          <span class="close-btn-wrap" @click="closeFullMap">
             <i class="iconfont icon-close"></i>
           </span>
+        </swiper-slide>
+        <!-- Optional controls -->
+        <div class="swiper-pagination" slot="pagination"></div>
+        <div slot="button-prev" class="com-arrow-wrap left-arrow-wrap">
+          <i class="iconfont icon-arrow"></i>
         </div>
+        <div slot="button-next" class="com-arrow-wrap right-arrow-wrap">
+          <i class="iconfont icon-arrow icon-right-arrow"></i>
+        </div>
+      </swiper>
+    </div>
+    <div class="full-map white-map" v-show="loadingShow">
+      <div class="loader">
+        <div class="dot"></div>
+        <div class="dot"></div>
+        <div class="dot"></div>
+        <div class="dot"></div>
+        <div class="dot"></div>
+      </div>
+    </div>
+    <div class="full-map" v-show="showHistoryMap">
+      <div class="history-wrap">
+        <img :src="history" class="history-img">
+        <a href="http://7xrc2h.com1.z0.glb.clouddn.com/Purearea%20Brochure%20V1.2.pdf" download="Purearea" class="download-wrap">
+          <span class="close-btn-wrap download-btn">
+            <i class="iconfont icon-download"></i>
+          </span>
+          <span class="download-txt">查看更多</span>
+        </a>
+        <span class="close-btn-wrap" @click="closeHistory">
+          <i class="iconfont icon-close"></i>
+        </span>
       </div>
     </div>
   </div>
@@ -437,8 +437,8 @@ pure-logo-txt::after {
   font-size: 18px;
 }
 .full-map {
-  width: 100%;
-  height: 100%;
+  width: 100vw;
+  height: 100vh;
   position: absolute;
   top: 0;
   left: 0;
