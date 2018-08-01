@@ -5,7 +5,7 @@
       <div class="nav-wrap">
         <img :src="purelogo" class="nav-logo">
         <ul class="nav-title">
-          <a :href="item.url" :target="item.target" v-for="(item, index) in $t('navTitles')" v-bind:key="index" @click="showHistory(index)" class="flex-nav-txt">
+          <a :href="item.url" :target="item.target" v-for="(item, index) in $t('navTitles')" v-bind:key="index" @click="titleOPtion(index)" @mouseenter="enterOption(index)" class="flex-nav-txt">
             <li class="nav-title-item">
               {{item.title}}
             </li>
@@ -15,6 +15,14 @@
               <i class="iconfont com-icon" :class="$t('curIcon')"></i>
             </span>
           </li>
+        </ul>
+        <ul class="nav-title select-group" :class="[showSelect?'select-group-show':'',$t('curRight')]" @mouseleave="leaveOption">
+          <a href="http://www.v-can.cn" target="_blank">
+            <li class="nav-title-item">{{$t('vCan')}}</li>
+          </a>
+          <a href="http://reset.build" target="_blank">
+            <li class="nav-title-item">{{$t('reset')}}</li>
+          </a>
         </ul>
       </div>
       <swiper :options="swiperOption" ref="mySwiper" class="swiper-wrap">
@@ -55,17 +63,8 @@
     <div class="full-map" v-show="mapShow">
       <swiper :options="swiper01Option" ref="mySwiper01" class="swiper01-wrap">
         <swiper-slide v-for="(item, index) in catalogueImgs" v-bind:key="index" class="swiper-no-swiping">
-          <img :data-src="item" class="swiper-img swiper-lazy">
+          <img :data-src="item" class="swiper-img swiper-lazy img-1920">
           <div class="swiper-lazy-preloader swiper-lazy-preloader-white"></div>
-          <a href="http://7xrc2h.com1.z0.glb.clouddn.com/Purearea%20Brochure%20V1.2.pdf" download="Purearea" class="download-wrap">
-            <span class="close-btn-wrap download-btn">
-              <i class="iconfont icon-download"></i>
-            </span>
-            <span class="download-txt">查看更多</span>
-          </a>
-          <span class="close-btn-wrap" @click="closeFullMap">
-            <i class="iconfont icon-close"></i>
-          </span>
         </swiper-slide>
         <!-- Optional controls -->
         <div class="swiper-pagination" slot="pagination"></div>
@@ -76,6 +75,15 @@
           <i class="iconfont icon-arrow icon-right-arrow"></i>
         </div>
       </swiper>
+      <a href="http://7xrc2h.com1.z0.glb.clouddn.com/Purearea%20Brochure%20V1.2.pdf" download="Purearea" class="download-wrap">
+        <span class="close-btn-wrap download-btn">
+          <i class="iconfont icon-download"></i>
+        </span>
+        <span class="download-txt">查看更多</span>
+      </a>
+      <span class="close-btn-wrap" @click="closeFullMap">
+        <i class="iconfont icon-close"></i>
+      </span>
     </div>
     <div class="full-map white-map" v-show="loadingShow">
       <div class="loader">
@@ -137,6 +145,7 @@ export default {
       curYear: '',
       showTip: false,
       showHistoryMap: false,
+      showSelect: false,
       history: history,
       curInd: -1,
       bgimg: bgimg,
@@ -246,9 +255,20 @@ export default {
       this.curInd = -1
       this.resetImg = this.resetblack
     },
-    showHistory (index) {
+    enterOption (index) {
+      console.log(index)
+      if (index === 2) {
+        this.showSelect = true
+      }
+    },
+    leaveOption () {
+      this.showSelect = false
+    },
+    titleOPtion (index) {
       if (index === 0) {
         this.showHistoryMap = true
+      } else if (index === 2) {
+        this.showSelect = !this.showSelect
       }
     },
     enterDownLoad () {
@@ -291,11 +311,12 @@ export default {
 }
 .swiper-img {
   width: 100%;
-  min-width: 700px;
-  min-height: 484px;
   border-bottom: 1px solid #eee;
   box-sizing: border-box;
   display: block;
+}
+.img-1920 {
+  width: 1920px;
 }
 .nav-wrap {
   width: 100%;
@@ -437,30 +458,30 @@ pure-logo-txt::after {
   font-size: 18px;
 }
 .full-map {
-  width: 100vw;
-  height: 100vh;
+  width: 100%;
+  height: 100%;
   position: absolute;
   top: 0;
   left: 0;
   background: rgb(0, 0, 0, 0.5);
   z-index: 1000;
   display: flex;
-  justify-content: center;
-  align-items: center;
 }
 .swiper01-wrap,
 .history-wrap {
-  width: 100%;
+  width: 1920px;
   position: relative;
+  overflow: scroll !important;
 }
 .history-img {
-  width: 100%;
+  width: 1920px;
 }
 .close-btn-wrap {
-  position: absolute;
+  position: fixed;
   top: 10px;
   right: 10px;
   cursor: pointer;
+  z-index: 99;
 }
 .icon-close:hover,
 .icon-download:hover {
@@ -474,7 +495,7 @@ pure-logo-txt::after {
   visibility: visible;
 }
 .com-arrow-wrap {
-  position: absolute;
+  position: fixed;
   top: 50%;
   transform: translateY(-50%);
   z-index: 1100;
@@ -573,7 +594,7 @@ pure-logo-txt::after {
   color: #666;
 }
 .download-txt {
-  position: absolute;
+  position: fixed;
   color: #fff;
   background-color: #666;
   font-size: 12px;
@@ -591,5 +612,32 @@ pure-logo-txt::after {
 .flex-nav-txt {
   display: flex;
   align-items: center;
+}
+.select-group {
+  position: absolute;
+  top: 60px;
+  z-index: 999;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  background: #fff;
+  border-radius: 4px;
+  opacity: 0;
+  transition: opacity 0.3s;
+}
+.select-group-27 {
+  right: 0;
+}
+.select-group-54 {
+  right: 54px;
+}
+.select-group-show {
+  opacity: 1;
+}
+.select-group .nav-title-item {
+  margin: 0 20px;
+  height: 40px;
+  line-height: 40px;
 }
 </style>

@@ -7,31 +7,20 @@ module.exports = {
     },
     {
       title: '联系我们',
-      url: '',
-      target: '_blank'
+      url:
+        'mailto:purearea@purearea.com.cn?cc=jun.xu@purearea.com.cn&cc=dawei.liu@purearea.com',
+      target: ''
     },
     {
       title: '友情链接',
       url: 'javascript:void(0)',
-      target: '_self'
+      target: ''
     }
-    // {
-    //   title: '维迈集团',
-    //   url: 'http://www.v-can.cn',
-    //   target: '_blank'
-    // },
-    // {
-    //   title: 'Reset认证',
-    //   url: 'https://reset.build',
-    //   target: '_blank'
-    // }
-    // {
-    //   title: '案例分析',
-    //   url: 'javascript:void(0)',
-    //   target: '_self'
-    // }
   ],
+  vCan: '维迈集团',
+  reset: 'Reset认证',
   curIcon: 'icon-en',
+  curRight: 'select-group-54',
   smTitle: '室内空气治理',
   largeTitle: '综合解决方案',
   contactBtn: '联系我们',

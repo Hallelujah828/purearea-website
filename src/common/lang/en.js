@@ -7,31 +7,20 @@ module.exports = {
     },
     {
       title: 'Contact Us',
-      url: '',
-      target: '_blank'
+      url:
+        'mailto:purearea@purearea.com.cn?cc=jun.xu@purearea.com.cn&cc=dawei.liu@purearea.com',
+      target: ''
     },
     {
-      title: 'Friendly Link',
+      title: 'Links',
       url: 'javascript:void(0)',
-      target: '_self'
+      target: ''
     }
-    // {
-    //   title: 'V-CAN Group',
-    //   url: 'http://www.v-can.cn',
-    //   target: '_blank'
-    // },
-    // {
-    //   title: 'RESET Certification',
-    //   url: 'http://reset.build',
-    //   target: '_blank'
-    // }
-    // {
-    //   title: 'Case analysis',
-    //   url: 'javascript:void(0)',
-    //   target: '_self'
-    // }
   ],
+  vCan: 'V-CAN Group',
+  reset: 'RESET Certification',
   curIcon: 'icon-zh',
+  curRight: 'select-group-27',
   smTitle: 'Indoor Air Quality',
   largeTitle: 'Total Solution',
   contactBtn: 'Contact Us',
