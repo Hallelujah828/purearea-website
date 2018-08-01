@@ -3,7 +3,7 @@
     <div class="blur-bg" :style="{backgroundImage: 'url(' + bgimg + ')'}"></div>
     <div class="container">
       <div class="nav-wrap">
-        <img :src="vcanlogo" class="nav-logo">
+        <img :src="purelogo" class="nav-logo">
         <ul class="nav-title">
           <a :href="item.url" :target="item.target" v-for="(item, index) in $t('navTitles')" v-bind:key="index" @click="showHistory(index)" class="flex-nav-txt">
             <li class="nav-title-item">
@@ -301,26 +301,26 @@ export default {
   width: 100%;
   padding: 0 30px;
   box-sizing: border-box;
-  height: 40px;
+  height: 50px;
   display: flex;
   justify-content: space-between;
   align-items: center;
-  background: #000;
+  background: #fff;
 }
 .nav-logo {
-  width: 100px;
+  height: 40px;
 }
 .nav-title {
   display: flex;
 }
 .nav-title-item {
   margin-left: 30px;
-  color: #fff;
+  color: #000;
   cursor: pointer;
 }
 .nav-title-item:hover,
 .nav-title-item:hover .iconfont {
-  color: #a42d58;
+  color: #1896d6;
 }
 .swiper-slide {
   position: relative;
@@ -427,7 +427,7 @@ pure-logo-txt::after {
 }
 .icon-en,
 .icon-zh {
-  color: #fff;
+  color: #000;
   font-size: 18px;
 }
 .logo-en-txt {

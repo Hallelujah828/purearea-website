@@ -6,15 +6,25 @@ module.exports = {
       target: '_self'
     },
     {
-      title: 'V-CAN Group',
-      url: 'http://www.v-can.cn',
+      title: 'Contact Us',
+      url: '',
       target: '_blank'
     },
     {
-      title: 'RESET Certification',
-      url: 'http://reset.build',
-      target: '_blank'
+      title: 'Friendly Link',
+      url: 'javascript:void(0)',
+      target: '_self'
     }
+    // {
+    //   title: 'V-CAN Group',
+    //   url: 'http://www.v-can.cn',
+    //   target: '_blank'
+    // },
+    // {
+    //   title: 'RESET Certification',
+    //   url: 'http://reset.build',
+    //   target: '_blank'
+    // }
     // {
     //   title: 'Case analysis',
     //   url: 'javascript:void(0)',
