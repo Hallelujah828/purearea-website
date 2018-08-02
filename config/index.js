@@ -49,7 +49,7 @@ module.exports = {
     // Paths
     assetsRoot: path.resolve(__dirname, '../dist'),
     assetsSubDirectory: 'static',
-    assetsPublicPath: 'https://purearea.oss-cn-shanghai.aliyuncs.com/',
+    assetsPublicPath: 'https://purearea1.oss-cn-shanghai.aliyuncs.com/',
 
     /**
      * Source Maps
