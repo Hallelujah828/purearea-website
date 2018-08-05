@@ -7,8 +7,9 @@ module.exports = {
     },
     {
       title: 'Contact Us',
-      url:
-        'mailto:purearea@purearea.com.cn?cc=jun.xu@purearea.com.cn&cc=dawei.liu@purearea.com',
+      url: 'javascript:void(0)',
+      // url:
+      //   'mailto:purearea@purearea.com.cn?cc=jun.xu@purearea.com.cn&cc=dawei.liu@purearea.com',
       target: ''
     },
     {

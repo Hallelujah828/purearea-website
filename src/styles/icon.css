@@ -1,11 +1,11 @@
 @font-face {
   font-family: 'iconfont'; /* project id 738171 */
-  src: url('//at.alicdn.com/t/font_738171_mgh2g3gkrgj.eot');
-  src: url('//at.alicdn.com/t/font_738171_mgh2g3gkrgj.eot?#iefix')
+  src: url('//at.alicdn.com/t/font_738171_4ot6cd5nyox.eot');
+  src: url('//at.alicdn.com/t/font_738171_4ot6cd5nyox.eot?#iefix')
       format('embedded-opentype'),
-    url('//at.alicdn.com/t/font_738171_mgh2g3gkrgj.woff') format('woff'),
-    url('//at.alicdn.com/t/font_738171_mgh2g3gkrgj.ttf') format('truetype'),
-    url('//at.alicdn.com/t/font_738171_mgh2g3gkrgj.svg#iconfont') format('svg');
+    url('//at.alicdn.com/t/font_738171_4ot6cd5nyox.woff') format('woff'),
+    url('//at.alicdn.com/t/font_738171_4ot6cd5nyox.ttf') format('truetype'),
+    url('//at.alicdn.com/t/font_738171_4ot6cd5nyox.svg#iconfont') format('svg');
 }
 
 .iconfont {
@@ -55,4 +55,13 @@
 }
 .icon-download:before {
   content: '\e63b';
+}
+.icon-email:before {
+  content: '\e60f';
+}
+.icon-address:before {
+  content: '\e607';
+}
+.icon-phone:before {
+  content: '\e60c';
 }

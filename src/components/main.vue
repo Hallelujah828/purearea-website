@@ -1,64 +1,38 @@
 <template>
-  <div class="main-wrap">
-    <div class="blur-bg" :style="{backgroundImage: 'url(' + bgimg + ')'}"></div>
-    <div class="container">
-      <div class="nav-wrap">
-        <img :src="purelogo" class="nav-logo">
-        <ul class="nav-title">
-          <a :href="item.url" :target="item.target" v-for="(item, index) in $t('navTitles')" v-bind:key="index" @click="titleOPtion(index)" @mouseenter="enterOption(index)" class="flex-nav-txt">
-            <li class="nav-title-item">
-              {{item.title}}
-            </li>
-          </a>
-          <li class="nav-title-item" @click="changeLocale">
-            <span class="icon-wrap">
-              <i class="iconfont com-icon" :class="$t('curIcon')"></i>
-            </span>
-          </li>
-        </ul>
-        <ul class="nav-title select-group" :class="[showSelect?'select-group-show':'',$t('curRight')]" @mouseleave="leaveOption">
-          <a href="http://www.v-can.cn" target="_blank">
-            <li class="nav-title-item">{{$t('vCan')}}</li>
-          </a>
-          <a href="http://reset.build" target="_blank">
-            <li class="nav-title-item">{{$t('reset')}}</li>
-          </a>
-        </ul>
-      </div>
-      <swiper :options="swiperOption" ref="mySwiper" class="swiper-wrap">
-        <swiper-slide v-for="(item, index) in swiperSlides" v-bind:key="index" class="min-height-slide">
-          <img :src="item" class="swiper-img" @click="downloadPdf(index)">
-          <div class="title-wrap" v-show="index==0">
-            <div class="pure-logo-wrap">
-              <img :src="purelogo" class="pure-logo">
-              <p class="pure-logo-txt">空氣品質改良專家</p>
-            </div>
-            <div class="title-righr-wrap">
-              <p class="title-sm-txt">{{$t('smTitle')}}</p>
-              <h2 class="title-large-txt">{{$t('largeTitle')}}</h2>
-              <a href="mailto:purearea@purearea.com.cn?cc=jun.xu@purearea.com.cn&cc=dawei.liu@purearea.com" class="contact-us">{{$t('contactBtn')}}</a>
-            </div>
+  <div>
+    <swiper :options="swiperOption" ref="mySwiper" class="swiper-wrap">
+      <swiper-slide v-for="(item, index) in swiperSlides" v-bind:key="index" class="min-height-slide">
+        <img :src="item" class="swiper-img" @click="downloadPdf(index)">
+        <div class="title-wrap" v-show="index==0">
+          <div class="pure-logo-wrap">
+            <img :src="purelogo" class="pure-logo">
+            <p class="pure-logo-txt">空氣品質改良專家</p>
           </div>
-        </swiper-slide>
-        <!-- Optional controls -->
-        <div class="swiper-pagination" slot="pagination"></div>
-        <div class="swiper-button-prev swiper-button-white" slot="button-prev"></div>
-        <div class="swiper-button-next swiper-button-white" slot="button-next"></div>
-      </swiper>
-      <div class="catalogue-wrap vel-flex">
-        <div v-for="(item, index) in $t('catalogue')" v-bind:key="index" class="catalogue-item vel-flex" :class="index == swiper01Index && mapShow || curInd == index ? 'active':''" @click="showFullMap(index)" @mouseenter="enter(index)" @mouseleave="leave">
-          <span class="icon-wrap" v-if="index!==$t('catalogue').length-1">
-            <i :class="item.icon" class="iconfont com-icon"></i>
-          </span>
-          <span class="icon-wrap" v-if="index==$t('catalogue').length-1">
-            <img :src="resetImg" class="reset-logo">
-          </span>
-          <p class="icon-txt">{{item.title}}</p>
+          <div class="title-righr-wrap">
+            <p class="title-sm-txt">{{$t('smTitle')}}</p>
+            <h2 class="title-large-txt">{{$t('largeTitle')}}</h2>
+            <a href="mailto:purearea@purearea.com.cn?cc=jun.xu@purearea.com.cn&cc=dawei.liu@purearea.com" class="contact-us">{{$t('contactBtn')}}</a>
+          </div>
         </div>
+      </swiper-slide>
+      <!-- Optional controls -->
+      <div class="swiper-pagination" slot="pagination"></div>
+      <div class="swiper-button-prev swiper-button-white" slot="button-prev"></div>
+      <div class="swiper-button-next swiper-button-white" slot="button-next"></div>
+    </swiper>
+    <div class="catalogue-wrap vel-flex">
+      <div v-for="(item, index) in $t('catalogue')" v-bind:key="index" class="catalogue-item vel-flex" :class="index == swiper01Index && mapShow || curInd == index ? 'active':''" @click="showFullMap(index)" @mouseenter="enter(index)" @mouseleave="leave">
+        <span class="icon-wrap" v-if="index!==$t('catalogue').length-1">
+          <i :class="item.icon" class="iconfont com-icon"></i>
+        </span>
+        <span class="icon-wrap" v-if="index==$t('catalogue').length-1">
+          <img :src="resetImg" class="reset-logo">
+        </span>
+        <p class="icon-txt">{{item.title}}</p>
       </div>
-      <div class="copyright">
-        <p>版权所有©2015 - {{curYear}}上海桦寅环保科技有限公司。沪ICP备18027631号-1。</p>
-      </div>
+    </div>
+    <div class="copyright">
+      <p>版权所有©2015 - {{curYear}}上海桦寅环保科技有限公司。沪ICP备18027631号-1。</p>
     </div>
     <div class="full-map" v-show="mapShow">
       <swiper :options="swiper01Option" ref="mySwiper01" class="swiper01-wrap">
@@ -94,20 +68,6 @@
         <div class="dot"></div>
       </div>
     </div>
-    <div class="full-map" v-show="showHistoryMap">
-      <div class="history-wrap">
-        <img :src="history" class="history-img">
-        <a href="http://7xrc2h.com1.z0.glb.clouddn.com/Purearea%20Brochure%20V1.2.pdf" download="Purearea" class="download-wrap">
-          <span class="close-btn-wrap download-btn">
-            <i class="iconfont icon-download"></i>
-          </span>
-          <span class="download-txt">查看更多</span>
-        </a>
-        <span class="close-btn-wrap" @click="closeHistory">
-          <i class="iconfont icon-close"></i>
-        </span>
-      </div>
-    </div>
   </div>
 </template>
 
@@ -118,7 +78,6 @@ import LangStorage from './../helpers/lang'
 const swiper0 = require('../../static/swiper00.jpeg')
 const swiper01 = require('../../static/swiper01.jpg')
 const swiper02 = require('../../static/swiper02.jpg')
-const history = require('../../static/swiper03.jpg')
 const pop0 = require('../../static/img-purify.jpg')
 const pop01 = require('../../static/img-purification.jpg')
 const pop02 = require('../../static/img-filter.jpg')
@@ -127,11 +86,10 @@ const pop04 = require('../../static/img-electrostatic.jpg')
 const pop05 = require('../../static/img-newfan.jpg')
 const pop06 = require('../../static/img-ch2o.jpg')
 const pop07 = require('../../static/img-certification.jpg')
-const purelogo = require('../../static/pure-logo.png')
 const vcanlogo = require('../../static/vcan-logo.png')
 const resetblack = require('../../static/reset-black.png')
 const resetblue = require('../../static/reset-blue.png')
-const bgimg = require('../../static/bg-img.png')
+const purelogo = require('../../static/pure-logo.png')
 
 export default {
   name: 'Main',
@@ -143,17 +101,13 @@ export default {
     const self = this
     return {
       curYear: '',
+      purelogo: purelogo,
       showTip: false,
-      showHistoryMap: false,
-      showSelect: false,
-      history: history,
       curInd: -1,
-      bgimg: bgimg,
       curLocale: '',
       resetImg: resetblack,
       resetblue: resetblue,
       resetblack: resetblack,
-      purelogo: purelogo,
       vcanlogo: vcanlogo,
       swiper01Index: -1,
       swiperOption: {
@@ -242,9 +196,6 @@ export default {
         this.resetImg = this.resetblue
       }
     },
-    closeHistory () {
-      this.showHistoryMap = false
-    },
     enter (index) {
       this.curInd = index
       if (index === 7) {
@@ -254,22 +205,6 @@ export default {
     leave () {
       this.curInd = -1
       this.resetImg = this.resetblack
-    },
-    enterOption (index) {
-      console.log(index)
-      if (index === 2) {
-        this.showSelect = true
-      }
-    },
-    leaveOption () {
-      this.showSelect = false
-    },
-    titleOPtion (index) {
-      if (index === 0) {
-        this.showHistoryMap = true
-      } else if (index === 2) {
-        this.showSelect = !this.showSelect
-      }
     },
     enterDownLoad () {
       this.showTip = true
@@ -288,14 +223,6 @@ export default {
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
-.container {
-  width: 1000px;
-  min-width: 1000px;
-  min-height: 100vh;
-  position: relative;
-  margin: 0 auto;
-  background: #fff;
-}
 .swiper-wrap {
   background-color: #ccc;
 }
@@ -318,31 +245,7 @@ export default {
 .img-1920 {
   width: 1920px;
 }
-.nav-wrap {
-  width: 100%;
-  padding: 0 30px;
-  box-sizing: border-box;
-  height: 50px;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  background: #fff;
-}
-.nav-logo {
-  height: 40px;
-}
-.nav-title {
-  display: flex;
-}
-.nav-title-item {
-  margin-left: 30px;
-  color: #000;
-  cursor: pointer;
-}
-.nav-title-item:hover,
-.nav-title-item:hover .iconfont {
-  color: #1896d6;
-}
+
 .swiper-slide {
   position: relative;
 }
@@ -430,15 +333,7 @@ pure-logo-txt::after {
 .catalogue-item:not(:last-child) {
   border-right: 2px dashed #ccc;
 }
-.com-icon {
-  font-size: 30px;
-}
-.icon-txt {
-  font-size: 12px;
-  margin-top: 10px;
-  text-align: center;
-  line-height: 1.2;
-}
+
 .copyright {
   width: 100%;
   background: #fff;
@@ -446,82 +341,7 @@ pure-logo-txt::after {
   text-align: center;
   padding-bottom: 30px;
 }
-.icon-en,
-.icon-zh {
-  color: #000;
-  font-size: 18px;
-}
-.logo-en-txt {
-  font-size: 13px;
-}
-.logo-zh-txt {
-  font-size: 18px;
-}
-.full-map {
-  width: 100%;
-  height: 100%;
-  position: absolute;
-  top: 0;
-  left: 0;
-  background: rgb(0, 0, 0, 0.5);
-  z-index: 1000;
-  display: flex;
-}
-.swiper01-wrap,
-.history-wrap {
-  width: 1920px;
-  position: relative;
-  overflow: scroll !important;
-}
-.history-img {
-  width: 1920px;
-}
-.close-btn-wrap {
-  position: fixed;
-  top: 10px;
-  right: 10px;
-  cursor: pointer;
-  z-index: 99;
-}
-.icon-close:hover,
-.icon-download:hover {
-  color: #000;
-}
-.icon-close {
-  font-size: 25px;
-  color: #666;
-}
-.swiper01-wrap:hover .com-arrow-wrap {
-  visibility: visible;
-}
-.com-arrow-wrap {
-  position: fixed;
-  top: 50%;
-  transform: translateY(-50%);
-  z-index: 1100;
-  color: #666;
-  cursor: pointer;
-  visibility: hidden;
-}
-.com-arrow-wrap:hover {
-  color: #000;
-}
-.icon-arrow {
-  font-size: 20px;
-}
-.left-arrow-wrap {
-  left: 10px;
-}
-.right-arrow-wrap {
-  right: 10px;
-}
-.icon-right-arrow {
-  display: block;
-  transform: rotate(180deg);
-}
-.white-map {
-  background: rgb(255, 255, 255, 0.9);
-}
+
 .loader {
   position: absolute;
   top: 50%;
@@ -572,72 +392,5 @@ pure-logo-txt::after {
 .reset-logo {
   height: 30px;
   display: block;
-}
-.main-wrap {
-  position: relative;
-  min-height: 100%;
-}
-.blur-bg {
-  position: absolute;
-  width: 100%;
-  height: 100%;
-  z-index: -1;
-  background-size: cover;
-  background-repeat: no-repeat;
-  background-position: center;
-}
-.download-btn {
-  right: 50px;
-}
-.icon-download {
-  font-size: 26px;
-  color: #666;
-}
-.download-txt {
-  position: fixed;
-  color: #fff;
-  background-color: #666;
-  font-size: 12px;
-  top: 12px;
-  right: 90px;
-  z-index: 1000;
-  opacity: 0;
-  transition: opacity 1s;
-  padding: 5px;
-  border-radius: 4px;
-}
-.download-wrap:hover .download-txt {
-  opacity: 1;
-}
-.flex-nav-txt {
-  display: flex;
-  align-items: center;
-}
-.select-group {
-  position: absolute;
-  top: 60px;
-  z-index: 999;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  background: #fff;
-  border-radius: 4px;
-  opacity: 0;
-  transition: opacity 0.3s;
-}
-.select-group-27 {
-  right: 0;
-}
-.select-group-54 {
-  right: 54px;
-}
-.select-group-show {
-  opacity: 1;
-}
-.select-group .nav-title-item {
-  margin: 0 20px;
-  height: 40px;
-  line-height: 40px;
 }
 </style>
