@@ -4,24 +4,36 @@
       <img :src="purelogo" class="nav-logo">
     </router-link>
     <ul class="nav-title">
-      <a :href="item.url" :target="item.target" v-for="(item, index) in $t('navTitles')" v-bind:key="index" @click="titleOPtion(index)" @mouseenter="enterOption(index)" class="flex-nav-txt">
+      <a :href="item.url" :target="item.target" v-for="(item, index) in $t('navTitles')" v-bind:key="index" @click="titleOPtion(index)" class="flex-nav-txt">
         <li class="nav-title-item">
           {{item.title}}
         </li>
       </a>
+      <el-dropdown>
+        <span class="el-dropdown-link">
+          {{$t('links')}}
+        </span>
+        <el-dropdown-menu slot="dropdown">
+
+          <el-dropdown-item>
+            <a href="http://www.v-can.cn" target="_blank">
+              {{$t('vCan')}}
+            </a>
+          </el-dropdown-item>
+
+          <el-dropdown-item>
+            <a href="http://reset.build" target="_blank">
+              {{$t('reset')}}
+            </a>
+          </el-dropdown-item>
+
+        </el-dropdown-menu>
+      </el-dropdown>
       <li class="nav-title-item" @click="changeLocale">
         <span class="icon-wrap">
           <i class="iconfont com-icon" :class="$t('curIcon')"></i>
         </span>
       </li>
-    </ul>
-    <ul class="nav-title select-group" :class="[showSelect?'select-group-show':'',$t('curRight')]" @mouseleave="leaveOption">
-      <a href="http://www.v-can.cn" target="_blank">
-        <li class="nav-title-item">{{$t('vCan')}}</li>
-      </a>
-      <a href="http://reset.build" target="_blank">
-        <li class="nav-title-item">{{$t('reset')}}</li>
-      </a>
     </ul>
   </div>
 </template>
@@ -35,8 +47,7 @@ export default {
   name: 'Nav',
   data () {
     return {
-      purelogo: purelogo,
-      showSelect: false
+      purelogo: purelogo
     }
   },
   methods: {
@@ -45,14 +56,6 @@ export default {
       locale === 'zh' ? this.$i18n.locale = 'en' : this.$i18n.locale = 'zh'
       LangStorage.setLang(this.$i18n.locale) // 用做切换和将用户习惯存储到本地浏览器
     },
-    enterOption (index) {
-      if (index === 2) {
-        this.showSelect = true
-      }
-    },
-    leaveOption () {
-      this.showSelect = false
-    },
     titleOPtion (index) {
       if (index === 0) {
         bus.$emit('showHistory', true)
@@ -60,8 +63,6 @@ export default {
         this.$router.push({
           name: 'Email'
         })
-      } else if (index === 2) {
-        this.showSelect = !this.showSelect
       }
     }
   },
@@ -89,7 +90,7 @@ export default {
   display: flex;
 }
 .nav-title-item {
-  margin-left: 30px;
+  margin: 0 15px;
   color: #000;
   cursor: pointer;
 }
@@ -100,35 +101,6 @@ export default {
 .flex-nav-txt {
   display: flex;
   align-items: center;
-}
-.select-group {
-  position: absolute;
-  top: 60px;
-  z-index: 999;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  background: #fff;
-  border-radius: 4px;
-  opacity: 0;
-  transition: opacity 0.3s;
-  border: 1px solid #e4e7ed;
-  box-shadow: 0 2px 12px 0 rgba(0, 0, 0, 0.1);
-}
-.select-group-27 {
-  right: 0;
-}
-.select-group-54 {
-  right: 54px;
-}
-.select-group-show {
-  opacity: 1;
-}
-.select-group .nav-title-item {
-  margin: 0 20px;
-  height: 40px;
-  line-height: 40px;
 }
 .com-icon {
   font-size: 30px;
@@ -149,5 +121,14 @@ export default {
 }
 .logo-zh-txt {
   font-size: 18px;
+}
+.el-dropdown-link.el-dropdown-selfdefine {
+  margin: 0 15px;
+  color: #000;
+  cursor: pointer;
+  font-size: 16px;
+}
+.el-dropdown-menu__item {
+  text-align: center;
 }
 </style>

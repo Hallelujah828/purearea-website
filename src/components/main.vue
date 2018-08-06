@@ -298,18 +298,7 @@ pure-logo-txt::after {
 .title-large-txt {
   font-size: 48px;
 }
-.contact-us {
-  width: 150px;
-  padding: 5px 0;
-  background: #1896d6;
-  color: #fff;
-  font-size: 16px;
-  cursor: pointer;
-  text-align: center;
-}
-.contact-us:hover {
-  background: rgba(24, 150, 214, 0.8);
-}
+
 .catalogue-wrap {
   width: 100%;
   height: 150px;

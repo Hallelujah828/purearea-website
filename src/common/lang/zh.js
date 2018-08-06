@@ -9,13 +9,9 @@ module.exports = {
       title: '联系我们',
       url: 'javascript:void(0)',
       target: ''
-    },
-    {
-      title: '友情链接',
-      url: 'javascript:void(0)',
-      target: ''
     }
   ],
+  links: '友情链接',
   vCan: '维迈集团',
   reset: 'Reset认证',
   curIcon: 'icon-en',
@@ -58,5 +54,9 @@ module.exports = {
     }
   ],
   copyright:
-    '版权所有©2015 - 2018上海桦寅环保科技有限公司。沪ICP备18027631号-1。'
+    '版权所有©2015 - 2018上海桦寅环保科技有限公司。沪ICP备18027631号-1。',
+  contactWay: '联系方式：',
+  MrLiu: '刘先生',
+  MrXu: '徐先生',
+  location: '上海市徐汇区 龙漕路200弄28号 宏润大厦916室 200235'
 }

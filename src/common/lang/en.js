@@ -7,17 +7,13 @@ module.exports = {
     },
     {
       title: 'Contact Us',
-      url: 'javascript:void(0)',
-      // url:
-      //   'mailto:purearea@purearea.com.cn?cc=jun.xu@purearea.com.cn&cc=dawei.liu@purearea.com',
-      target: ''
-    },
-    {
-      title: 'Links',
-      url: 'javascript:void(0)',
+      // url: 'javascript:void(0)',
+      url:
+        'mailto:purearea@purearea.com.cn?cc=jun.xu@purearea.com.cn&cc=dawei.liu@purearea.com',
       target: ''
     }
   ],
+  links: 'Links',
   vCan: 'V-CAN Group',
   reset: 'RESET Certification',
   curIcon: 'icon-zh',
@@ -60,5 +56,10 @@ module.exports = {
     }
   ],
   copyright:
-    '版权所有©2015 - 2018上海桦寅环保科技有限公司。沪ICP备18027631号-1。'
+    '版权所有©2015 - 2018上海桦寅环保科技有限公司。沪ICP备18027631号-1。',
+  contactWay: 'Contact Information:',
+  MrLiu: 'Mr. Liu',
+  MrXu: 'Mr. Xu',
+  location:
+    '200235, Room 916, Hongrun Building, No. 28, Lane 200, Longcao Road, Xuhui District, Shanghai'
 }

@@ -16,7 +16,10 @@ import {
   Form,
   FormItem,
   Dialog,
-  Button
+  Button,
+  Dropdown,
+  DropdownMenu,
+  DropdownItem
 } from 'element-ui'
 
 Vue.config.productionTip = false
@@ -30,6 +33,9 @@ Vue.use(Form)
 Vue.use(FormItem)
 Vue.use(Dialog)
 Vue.use(Button)
+Vue.use(Dropdown)
+Vue.use(DropdownMenu)
+Vue.use(DropdownItem)
 
 // 使用多文件管理不同的语言
 const i18n = new VueI18n({

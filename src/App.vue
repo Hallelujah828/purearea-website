@@ -165,4 +165,16 @@ body {
   text-align: center;
   line-height: 1.2;
 }
+.contact-us {
+  width: 150px;
+  padding: 5px 0;
+  background: #1896d6;
+  color: #fff;
+  font-size: 16px;
+  cursor: pointer;
+  text-align: center;
+}
+.contact-us:hover {
+  background: rgba(24, 150, 214, 0.8);
+}
 </style>
