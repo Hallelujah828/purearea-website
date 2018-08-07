@@ -58,5 +58,6 @@ module.exports = {
   contactWay: '联系方式：',
   MrLiu: '刘先生',
   MrXu: '徐先生',
-  location: '上海市徐汇区 龙漕路200弄28号 宏润大厦916室 200235'
+  location: '上海市徐汇区 龙漕路200弄28号 宏润大厦916室 200235',
+  back: '返回首页'
 }

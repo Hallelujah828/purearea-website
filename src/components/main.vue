@@ -11,7 +11,9 @@
           <div class="title-righr-wrap">
             <p class="title-sm-txt">{{$t('smTitle')}}</p>
             <h2 class="title-large-txt">{{$t('largeTitle')}}</h2>
-            <a href="mailto:purearea@purearea.com.cn?cc=jun.xu@purearea.com.cn&cc=dawei.liu@purearea.com" class="contact-us">{{$t('contactBtn')}}</a>
+            <router-link :to="{name: 'Email'}" class="contact-us">
+              {{$t('contactBtn')}}
+            </router-link>
           </div>
         </div>
       </swiper-slide>
@@ -72,39 +74,39 @@
 </template>
 
 <script>
-import 'swiper/dist/css/swiper.css'
-import { swiper, swiperSlide } from 'vue-awesome-swiper'
-import LangStorage from './../helpers/lang'
-const swiper0 = require('../../static/swiper00.jpeg')
-const swiper01 = require('../../static/swiper01.jpg')
-const swiper02 = require('../../static/swiper02.jpg')
-const pop0 = require('../../static/img-purify.jpg')
-const pop01 = require('../../static/img-purification.jpg')
-const pop02 = require('../../static/img-filter.jpg')
-const pop03 = require('../../static/img-intelligent.jpg')
-const pop04 = require('../../static/img-electrostatic.jpg')
-const pop05 = require('../../static/img-newfan.jpg')
-const pop06 = require('../../static/img-ch2o.jpg')
-const pop07 = require('../../static/img-certification.jpg')
-const vcanlogo = require('../../static/vcan-logo.png')
-const resetblack = require('../../static/reset-black.png')
-const resetblue = require('../../static/reset-blue.png')
-const purelogo = require('../../static/pure-logo.png')
+import "swiper/dist/css/swiper.css"
+import { swiper, swiperSlide } from "vue-awesome-swiper"
+import LangStorage from "./../helpers/lang"
+const swiper0 = require("../../static/swiper00.jpeg")
+const swiper01 = require("../../static/swiper01.jpg")
+const swiper02 = require("../../static/swiper02.jpg")
+const pop0 = require("../../static/img-purify.jpg")
+const pop01 = require("../../static/img-purification.jpg")
+const pop02 = require("../../static/img-filter.jpg")
+const pop03 = require("../../static/img-intelligent.jpg")
+const pop04 = require("../../static/img-electrostatic.jpg")
+const pop05 = require("../../static/img-newfan.jpg")
+const pop06 = require("../../static/img-ch2o.jpg")
+const pop07 = require("../../static/img-certification.jpg")
+const vcanlogo = require("../../static/vcan-logo.png")
+const resetblack = require("../../static/reset-black.png")
+const resetblue = require("../../static/reset-blue.png")
+const purelogo = require("../../static/pure-logo.png")
 
 export default {
-  name: 'Main',
+  name: "Main",
   components: {
     swiper,
     swiperSlide
   },
-  data () {
+  data() {
     const self = this
     return {
-      curYear: '',
+      curYear: "",
       purelogo: purelogo,
       showTip: false,
       curInd: -1,
-      curLocale: '',
+      curLocale: "",
       resetImg: resetblack,
       resetblue: resetblue,
       resetblack: resetblack,
@@ -115,20 +117,20 @@ export default {
         notNextTick: true,
         preventLinksPropagation: true,
         speed: 3500,
-        slidesPerView: 'auto',
+        slidesPerView: "auto",
         centeredSlides: true,
         navigation: {
-          nextEl: '.swiper-button-next',
-          prevEl: '.swiper-button-prev'
+          nextEl: ".swiper-button-next",
+          prevEl: ".swiper-button-prev"
         },
         preloadImages: true,
         updateOnImagesReady: true,
         on: {
-          init: function () {
+          init: function() {
             self.loadingShow = true
             this.autoplay.stop()
           },
-          imagesReady: function () {
+          imagesReady: function() {
             self.loadingShow = false
             this.autoplay.start()
           }
@@ -138,20 +140,20 @@ export default {
       swiper01Option: {
         noSwiping: true,
         notNextTick: true,
-        effect: 'fade',
+        effect: "fade",
         speed: 300,
         autoplay: false,
-        slidesPerView: 'auto',
+        slidesPerView: "auto",
         centeredSlides: true,
         navigation: {
-          nextEl: '.right-arrow-wrap',
-          prevEl: '.left-arrow-wrap'
+          nextEl: ".right-arrow-wrap",
+          prevEl: ".left-arrow-wrap"
         },
         lazy: {
           loadPrevNext: true
         },
         on: {
-          transitionEnd: function () {
+          transitionEnd: function() {
             self.swiper01Index = this.activeIndex
           }
         }
@@ -161,34 +163,34 @@ export default {
     }
   },
   computed: {
-    swiper () {
+    swiper() {
       return this.$refs.mySwiper.swiper
     },
-    swiper01 () {
+    swiper01() {
       return this.$refs.mySwiper01.swiper
     },
-    catalogueImgs () {
+    catalogueImgs() {
       return [pop05, pop01, pop02, pop03, pop04, pop06, pop0, pop07]
     }
   },
-  mounted () {
+  mounted() {
     this.swiper.slideTo(0, 0, false)
     this.swiper01.slideTo(0, 0, false)
     this.curYear = new Date().getFullYear()
   },
   methods: {
-    changeLocale () {
+    changeLocale() {
       let locale = this.$i18n.locale
-      locale === 'zh' ? this.$i18n.locale = 'en' : this.$i18n.locale = 'zh'
+      locale === "zh" ? (this.$i18n.locale = "en") : (this.$i18n.locale = "zh")
       LangStorage.setLang(this.$i18n.locale) // 用做切换和将用户习惯存储到本地浏览器
     },
-    closeFullMap () {
+    closeFullMap() {
       this.mapShow = false
       this.swiper01Index = -1
       this.swiper.autoplay.start()
       this.resetImg = this.resetblack
     },
-    showFullMap (index) {
+    showFullMap(index) {
       this.mapShow = true
       this.swiper.autoplay.stop()
       this.swiper01.slideTo(index, 0, false)
@@ -196,25 +198,27 @@ export default {
         this.resetImg = this.resetblue
       }
     },
-    enter (index) {
+    enter(index) {
       this.curInd = index
       if (index === 7) {
         this.resetImg = this.resetblue
       }
     },
-    leave () {
+    leave() {
       this.curInd = -1
       this.resetImg = this.resetblack
     },
-    enterDownLoad () {
+    enterDownLoad() {
       this.showTip = true
     },
-    leaveDownLoad () {
+    leaveDownLoad() {
       this.showTip = false
     },
-    downloadPdf (index) {
+    downloadPdf(index) {
       if (index !== 0) {
-        window.open('http://7xrc2h.com1.z0.glb.clouddn.com/Purearea%20Brochure%20V1.2.pdf')
+        window.open(
+          "http://7xrc2h.com1.z0.glb.clouddn.com/Purearea%20Brochure%20V1.2.pdf"
+        )
       }
     }
   }
@@ -284,7 +288,7 @@ export default {
 }
 pure-logo-txt::after {
   display: inline-block;
-  content: '';
+  content: "";
   overflow: hidden;
   width: 100%;
   height: 0;

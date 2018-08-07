@@ -31,7 +31,12 @@
           </div>
         </div>
       </div>
-      <a href="mailto:purearea@purearea.com.cn?cc=jun.xu@purearea.com.cn&cc=dawei.liu@purearea.com" class="contact-us block-btn">{{$t('contactBtn')}}</a>
+      <div class="flex-btn">
+        <router-link :to="{name: 'Main'}" class="contact-us gray-btn block-btn">
+          {{$t('back')}}
+        </router-link>
+        <a href="mailto:purearea@purearea.com.cn?cc=jun.xu@purearea.com.cn&cc=dawei.liu@purearea.com" class="contact-us block-btn">{{$t('contactBtn')}}</a>
+      </div>
       <!-- <div class>请留下您的信息，我们会尽快与您取得联系：</div> -->
       <!-- <el-form ref="form" :model="form">
         <div class="form-item-group">
@@ -98,23 +103,21 @@
 </template>
 
 <script>
-
 export default {
-  name: 'Email',
-  data () {
+  name: "Email",
+  data() {
     return {
       form: {
-        name: '',
-        region: '',
-        desc: ''
+        name: "",
+        region: "",
+        desc: ""
       }
     }
   },
-  components: {
-  },
+  components: {},
   methods: {
-    onSubmit () {
-      console.log('submit!')
+    onSubmit() {
+      console.log("submit!")
     }
   }
 }
@@ -175,5 +178,13 @@ export default {
   padding-right: 10px;
   color: #fff;
   cursor: pointer;
+}
+.flex-btn{
+  display: flex;
+}
+.gray-btn{
+  background: #f6f7f8;;
+  margin-right: 20px;
+  color: #000;
 }
 </style>
