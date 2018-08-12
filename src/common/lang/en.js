@@ -61,6 +61,6 @@ module.exports = {
   MrLiu: 'Mr. Liu',
   MrXu: 'Mr. Xu',
   location:
-    '200235, Room 916, Hongrun Building, No. 28, Lane 200, Longcao Road, Xuhui District, Shanghai',
+    'Room 916, Hongrun Building, No. 28, Lane 200, Longcao Road, Xuhui District, Shanghai 200235 ',
   back: 'Back To Home'
 }
