@@ -7,27 +7,27 @@
       {{$t('contactBtn')}}
     </div>
     <div class="main-form">
-      <div class>请留下您的信息，我们会尽快与您取得联系：</div>
+      <div class>{{$t('contactInfo')}}</div>
       <el-form ref="ruleForm" :model="ruleForm" :rules="rules">
-        <div class="form-item-title">基本信息</div>
+        <div class="form-item-title">{{$t('basicInfo')}}</div>
         <div class="form-item-group">
           <div class="form-col-6">
             <div class="flex-form-item">
-              <el-form-item label="姓名（必填）" prop="name" class="form-com-width">
+              <el-form-item :label="$t('requiredName')" prop="name" class="form-com-width">
                 <el-input v-model="ruleForm.name" clearable></el-input>
               </el-form-item>
-              <el-form-item label="邮箱（必填）" prop="email" class="input-width-425">
+              <el-form-item :label="$t('requiredEmail')" prop="email" class="input-width-425">
                 <el-input v-model="ruleForm.email" clearable></el-input>
               </el-form-item>
             </div>
             <div class="flex-form-item">
-              <el-form-item label="联系电话（必填）" prop="telphone" class="form-com-width">
+              <el-form-item :label="$t('requiredPhone')" prop="telphone" class="form-com-width">
                 <el-input v-model="ruleForm.telphone" clearable></el-input>
               </el-form-item>
-              <el-form-item label="职位" class="form-com-width" prop="job">
+              <el-form-item :label="$t('infoJob')" class="form-com-width" prop="job">
                 <el-input v-model="ruleForm.job" clearable></el-input>
               </el-form-item>
-              <el-form-item label="公司/单位" class="form-com-width" prop="company">
+              <el-form-item :label="$t('infoCompany')" class="form-com-width" prop="company">
                 <el-input v-model="ruleForm.company" clearable></el-input>
               </el-form-item>
             </div>
@@ -63,18 +63,18 @@
             </div>
           </div>
         </div>
-        <div class="form-item-title">项目信息</div>
+        <div class="form-item-title">{{$t('projectInfo')}}</div>
         <div class="form-item-group">
           <div class="flex-form-item form-col-10">
-            <el-form-item label="城市（必填）" prop="city" class="form-com-width">
+            <el-form-item :label="$t('requiredCity')" prop="city" class="form-com-width">
               <el-input v-model="ruleForm.city" clearable></el-input>
             </el-form-item>
-            <el-form-item label="地址" prop="address" class="input-width-425 input-margin-5">
+            <el-form-item :label="$t('address')" prop="address" class="input-width-425 input-margin-5">
               <el-input v-model="ruleForm.address" clearable></el-input>
             </el-form-item>
-            <el-form-item label="类型（必选）" prop="type" class="info-wrap">
-              <el-select v-model="ruleForm.type" placeholder="请选择类型">
-                <el-option :label="item" :value="index" v-for="(item, index) in projectTypes" :key="index"></el-option>
+            <el-form-item :label="$t('type')" prop="type" class="info-wrap">
+              <el-select v-model="ruleForm.type" :placeholder="$t('typeSelect')">
+                <el-option :label="item" :value="index" v-for="(item, index) in $t('projectTypes')" :key="index"></el-option>
               </el-select>
             </el-form-item>
           </div>
@@ -82,7 +82,7 @@
         <div class="form-item-group">
           <div class="flex-form-item form-col-10">
             <div class="form-item-column">
-              <el-form-item label="项目面积（m2）" prop="area" class="form-com-width">
+              <el-form-item :label="$t('area')" prop="area" class="form-com-width">
                 <el-input v-model.number="ruleForm.area" clearable></el-input>
               </el-form-item>
               <el-button type="primary" @click="onSubmit('ruleForm')" class="form-com-width margin-form-btm">{{$t('contactBtn')}}</el-button>
@@ -90,17 +90,17 @@
                 <el-button class="form-com-width">{{$t('back')}}</el-button>
               </router-link>
             </div>
-            <el-form-item label="请留言" class="form-textarea" prop="message">
+            <el-form-item :label="$t('message')" class="form-textarea" prop="message">
               <el-input type="textarea" :rows="7" v-model="ruleForm.message"></el-input>
             </el-form-item>
           </div>
         </div>
       </el-form>
     </div>
-    <el-dialog title="提示" :visible.sync="centerDialogVisible" width="30%" center>
+    <el-dialog :title="$t('prompt')" :visible.sync="centerDialogVisible" width="30%" center>
       <span>{{dialogMessage}}</span>
       <span slot="footer" class="dialog-footer">
-        <el-button type="primary" @click="centerDialogVisible = false">确 定</el-button>
+        <el-button type="primary" @click="centerDialogVisible = false">{{$t('confirm')}}</el-button>
       </span>
     </el-dialog>
   </div>
@@ -114,19 +114,19 @@ export default {
     var checkPhone = (rule, value, callback) => {
       const phoneReg = /^1[3|4|5|7|8][0-9]{9}$/
       if (!value) {
-        return callback(new Error('电话号码不能为空'))
+        return callback(new Error(this.$t('errEmptyPhone')))
       }
       setTimeout(() => {
         // Number.isInteger是es6验证数字是否为整数的方法,但是我实际用的时候输入的数字总是识别成字符串
         // 所以我就在前面加了一个+实现隐式转换
 
         if (!Number.isInteger(+value)) {
-          callback(new Error('请输入数字值'))
+          callback(new Error(this.$t('numMessage')))
         } else {
           if (phoneReg.test(value)) {
             callback()
           } else {
-            callback(new Error('电话号码格式不正确'))
+            callback(new Error(this.$t('errPhoneReg')))
           }
         }
       }, 100)
@@ -134,13 +134,13 @@ export default {
     var checkEmail = (rule, value, callback) => {
       const mailReg = /^([a-zA-Z0-9_-])+@([a-zA-Z0-9_-])+(.[a-zA-Z0-9_-])+/
       if (!value) {
-        return callback(new Error('邮箱不能为空'))
+        return callback(new Error(this.$t('errEmptyEmail')))
       }
       setTimeout(() => {
         if (mailReg.test(value)) {
           callback()
         } else {
-          callback(new Error('请输入正确的邮箱格式'))
+          callback(new Error(this.$t('emailMessage')))
         }
       }, 100)
     }
@@ -159,29 +159,17 @@ export default {
         area: '',
         message: ''
       },
-      projectTypes: [
-        '办公室',
-        '住宅——公寓',
-        '住宅——别墅',
-        '厂房',
-        '汽车',
-        '医疗机构',
-        '学校',
-        '商场',
-        '酒店',
-        '其他'
-      ],
       rules: {
-        name: {required: true, message: '请输入姓名', trigger: 'blur'},
+        name: {required: true, message: this.$t('nameMessage'), trigger: 'blur'},
         email: {validator: checkEmail, required: true, trigger: 'blur'},
         telphone: {validator: checkPhone, required: true, trigger: 'blur'},
-        city: {required: true, message: '请输入城市', trigger: 'blur'},
-        type: {required: true, message: '请选择类型', trigger: 'change'},
+        city: {required: true, message: this.$t('cityMessage'), trigger: 'blur'},
+        type: {required: true, message: this.$t('typeMessage'), trigger: 'change'},
         area: {
           validator: (rule, value, callback) => {
-            if (value !== "") {
+            if (value !== '') {
               if ((/^[+]{0,1}(\d+)$|^[+]{0,1}(\d+\.\d+)$/).test(value) === false) {
-                callback(new Error("请输入数字"))
+                callback(new Error(this.$t('numMessage')))
               } else {
                 callback();
               }
@@ -203,24 +191,13 @@ export default {
             .then((response) => {
               if (response.status === 200) {
                 this.centerDialogVisible = true
-                this.dialogMessage = '发送成功，3s后返回首页'
+                this.dialogMessage = this.$t('successMessage')
                 setTimeout(() => {
                   this.$router.push({ name: 'Main' })
                   this.centerDialogVisible = false
                 }, 3000)
-              } else {
-                this.centerDialogVisible = true
-                this.dialogMessage = response.data
               }
             })
-            .catch((error) => {
-              this.centerDialogVisible = true
-              this.dialogMessage = error
-            })
-        } else {
-          this.centerDialogVisible = true
-          this.dialogMessage = '提交失败，请稍后再试！'
-          return false
         }
       });
     }
