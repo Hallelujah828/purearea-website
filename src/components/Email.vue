@@ -85,7 +85,7 @@
               <el-form-item :label="$t('area')" prop="area" class="form-com-width">
                 <el-input v-model.number="ruleForm.area" clearable></el-input>
               </el-form-item>
-              <el-button type="primary" @click="onSubmit('ruleForm')" class="form-com-width margin-form-btm">{{$t('contactBtn')}}</el-button>
+              <el-button type="primary" @click="onSubmit('ruleForm')" class="form-com-width margin-form-btm">{{$t('confirmBtn')}}</el-button>
               <router-link :to="{name: 'Main'}" class="block-link">
                 <el-button class="form-com-width">{{$t('back')}}</el-button>
               </router-link>
@@ -195,6 +195,16 @@ export default {
                 setTimeout(() => {
                   this.$router.push({ name: 'Main' })
                   this.centerDialogVisible = false
+                  this.ruleForm.name = ''
+                  this.ruleForm.email = ''
+                  this.ruleForm.telphone = ''
+                  this.ruleForm.job = ''
+                  this.ruleForm.company = ''
+                  this.ruleForm.city = ''
+                  this.ruleForm.address = ''
+                  this.ruleForm.type = ''
+                  this.ruleForm.area = ''
+                  this.ruleForm.message = ''
                 }, 3000)
               }
             })

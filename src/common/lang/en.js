@@ -7,9 +7,7 @@ module.exports = {
     },
     {
       title: 'Contact Us',
-      // url: 'javascript:void(0)',
-      url:
-        'mailto:purearea@purearea.com.cn?cc=jun.xu@purearea.com.cn&cc=dawei.liu@purearea.com',
+      url: 'javascript:void(0)',
       target: ''
     }
   ],
@@ -79,6 +77,7 @@ module.exports = {
   message: 'Please leave a message',
   prompt: 'Prompt',
   confirm: 'Confirm',
+  confirmBtn: 'Sending',
   nameMessage: 'Please enter your name',
   cityMessage: 'Please enter the city',
   typeMessage: 'Please choose the type',

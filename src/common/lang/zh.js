@@ -75,6 +75,7 @@ module.exports = {
   message: '请留言',
   prompt: '提示',
   confirm: '确定',
+  confirmBtn: '确认发送',
   nameMessage: '请输入姓名',
   cityMessage: '请输入城市',
   typeMessage: '请选择类型',
